@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="partner_ledger" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="48"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Righe" mode="Opaque" fill="Solid">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#FAF5AF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     temp_partnerledger."id" AS temp_partnerledger_id,
+     temp_partnerledger."create_uid" AS temp_partnerledger_create_uid,
+     temp_partnerledger."create_date" AS temp_partnerledger_create_date,
+     temp_partnerledger."write_date" AS temp_partnerledger_write_date,
+     temp_partnerledger."write_uid" AS temp_partnerledger_write_uid,
+     temp_partnerledger."p_company_id" AS temp_partnerledger_p_company_id,
+     temp_partnerledger."p_fromdate" AS temp_partnerledger_p_fromdate,
+     temp_partnerledger."debito_ini" AS temp_partnerledger_debito_ini,
+     temp_partnerledger."credito_ini" AS temp_partnerledger_credito_ini,
+     temp_partnerledger."desc_mov" AS temp_partnerledger_desc_mov,
+     temp_partnerledger."saldo" AS temp_partnerledger_saldo,
+     temp_partnerledger."avere" AS temp_partnerledger_avere,
+     temp_partnerledger."p_patner_name" AS temp_partnerledger_p_patner_name,
+     temp_partnerledger."p_todate" AS temp_partnerledger_p_todate,
+     temp_partnerledger."partner_id" AS temp_partnerledger_partner_id,
+     temp_partnerledger."ord_id" AS temp_partnerledger_ord_id,
+     temp_partnerledger."dare" AS temp_partnerledger_dare,
+     temp_partnerledger."date_mov" AS temp_partnerledger_date_mov,
+     temp_partnerledger."ref" AS temp_partnerledger_ref,
+     temp_partnerledger."journal_id" AS temp_partnerledger_journal_id,
+     res_partner."name" AS res_partner_name,
+     res_partner_A."name" AS res_partner_A_name,
+     res_partner_A."street" AS res_partner_A_street,
+     res_partner_A."city" AS res_partner_A_city,
+     res_partner_A."zip" AS res_partner_A_zip,
+     res_partner_A."email" AS res_partner_A_email,
+     res_partner_A."vat" AS res_partner_A_vat,
+     res_partner_A."fax" AS res_partner_A_fax,
+     res_partner_A."street2" AS res_partner_A_street2,
+     res_partner_A."phone" AS res_partner_A_phone,
+     res_partner_A."mobile" AS res_partner_A_mobile,
+     res_partner_A."fiscalcode" AS res_partner_A_fiscalcode,
+     res_province."code" AS res_province_code,
+     res_province."name" AS res_province_name,
+     account_journal."name" AS account_journal_name,
+     res_company."name" AS res_company_name
+FROM
+     "public"."res_company" res_company RIGHT OUTER JOIN "public"."temp_partnerledger" temp_partnerledger ON res_company."id" = temp_partnerledger."p_company_id"
+     LEFT OUTER JOIN "public"."res_partner" res_partner ON temp_partnerledger."partner_id" = res_partner."id"
+     LEFT OUTER JOIN "public"."account_journal" account_journal ON temp_partnerledger."journal_id" = account_journal."id"
+     LEFT OUTER JOIN "public"."res_partner" res_partner_A ON res_company."partner_id" = res_partner_A."id"
+     LEFT OUTER JOIN "public"."res_province" res_province ON res_partner_A."province" = res_province."id"
+ORDER BY
+     temp_partnerledger."partner_id" ASC,
+     temp_partnerledger."ord_id" ASC]]>
+	</queryString>
+	<field name="temp_partnerledger_id" class="java.lang.Integer"/>
+	<field name="temp_partnerledger_create_uid" class="java.lang.Integer"/>
+	<field name="temp_partnerledger_create_date" class="java.sql.Timestamp"/>
+	<field name="temp_partnerledger_write_date" class="java.sql.Timestamp"/>
+	<field name="temp_partnerledger_write_uid" class="java.lang.Integer"/>
+	<field name="temp_partnerledger_p_company_id" class="java.lang.Integer"/>
+	<field name="temp_partnerledger_p_fromdate" class="java.sql.Date"/>
+	<field name="temp_partnerledger_debito_ini" class="java.math.BigDecimal"/>
+	<field name="temp_partnerledger_credito_ini" class="java.math.BigDecimal"/>
+	<field name="temp_partnerledger_desc_mov" class="java.lang.String"/>
+	<field name="temp_partnerledger_saldo" class="java.math.BigDecimal"/>
+	<field name="temp_partnerledger_avere" class="java.math.BigDecimal"/>
+	<field name="temp_partnerledger_p_patner_name" class="java.lang.String"/>
+	<field name="temp_partnerledger_p_todate" class="java.sql.Date"/>
+	<field name="temp_partnerledger_partner_id" class="java.lang.Integer"/>
+	<field name="temp_partnerledger_ord_id" class="java.lang.Double"/>
+	<field name="temp_partnerledger_dare" class="java.math.BigDecimal"/>
+	<field name="temp_partnerledger_date_mov" class="java.sql.Date"/>
+	<field name="temp_partnerledger_ref" class="java.lang.String"/>
+	<field name="temp_partnerledger_journal_id" class="java.lang.Integer"/>
+	<field name="res_partner_name" class="java.lang.String"/>
+	<field name="res_partner_a_name" class="java.lang.String"/>
+	<field name="res_partner_a_street" class="java.lang.String"/>
+	<field name="res_partner_a_city" class="java.lang.String"/>
+	<field name="res_partner_a_zip" class="java.lang.String"/>
+	<field name="res_partner_a_email" class="java.lang.String"/>
+	<field name="res_partner_a_vat" class="java.lang.String"/>
+	<field name="res_partner_a_fax" class="java.lang.String"/>
+	<field name="res_partner_a_street2" class="java.lang.String"/>
+	<field name="res_partner_a_phone" class="java.lang.String"/>
+	<field name="res_partner_a_mobile" class="java.lang.String"/>
+	<field name="res_partner_a_fiscalcode" class="java.lang.String"/>
+	<field name="res_province_code" class="java.lang.String"/>
+	<field name="res_province_name" class="java.lang.String"/>
+	<field name="account_journal_name" class="java.lang.String"/>
+	<field name="res_company_name" class="java.lang.String"/>
+	<variable name="tot_dare" class="java.math.BigDecimal" resetType="Group" resetGroup="partner" calculation="Sum">
+		<variableExpression><![CDATA[$F{temp_partnerledger_dare}]]></variableExpression>
+	</variable>
+	<variable name="tot_avere" class="java.math.BigDecimal" resetType="Group" resetGroup="partner" calculation="Sum">
+		<variableExpression><![CDATA[$F{temp_partnerledger_avere}]]></variableExpression>
+	</variable>
+	<group name="partner" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{temp_partnerledger_partner_id}]]></groupExpression>
+		<groupHeader>
+			<band height="64">
+				<staticText>
+					<reportElement x="0" y="0" width="57" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Partner]]></text>
+				</staticText>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement x="57" y="0" width="745" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_name}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="413" y="20" width="128" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Saldo iniziale al]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="541" y="20" width="90" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{temp_partnerledger_p_fromdate}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="720" y="20" width="80" height="20">
+						<printWhenExpression><![CDATA[$F{temp_partnerledger_credito_ini} >= 0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_credito_ini}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="631" y="20" width="89" height="20" forecolor="#FF3333">
+						<printWhenExpression><![CDATA[$F{temp_partnerledger_debito_ini}>0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_debito_ini}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="45" width="67" height="15"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Data]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="333" y="45" width="208" height="15"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Descrizione]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="552" y="47" width="81" height="15"/>
+					<textElement textAlignment="Right">
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Dare]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="633" y="47" width="70" height="15"/>
+					<textElement textAlignment="Right">
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Avere]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="732" y="47" width="70" height="15"/>
+					<textElement textAlignment="Right">
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Saldo]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="63" width="802" height="1"/>
+				</line>
+				<staticText>
+					<reportElement x="69" y="45" width="67" height="15"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Voce]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="141" y="45" width="67" height="15"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Giornale]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="210" y="45" width="118" height="15"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Partner]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="37">
+				<line>
+					<reportElement x="0" y="0" width="802" height="1"/>
+				</line>
+				<line>
+					<reportElement x="0" y="3" width="802" height="1"/>
+				</line>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement x="633" y="5" width="70" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{tot_avere}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement x="552" y="5" width="81" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{tot_dare}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="16" width="602" height="15"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{res_partner_a_street} == null ? "": $F{res_partner_a_street})+" "+
+($F{res_partner_a_street2} == null ? "" :$F{res_partner_a_street2})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="48" width="602" height="15"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Partita IVA: " + ($F{res_partner_a_vat} == null ? "": $F{res_partner_a_vat})+
+" Codice Fiscale: " +
+($F{res_partner_a_fiscalcode} == null ? "" :$F{res_partner_a_fiscalcode})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="602" height="15"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_company_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="32" width="602" height="15"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[($F{res_partner_a_zip} == null ? "": $F{res_partner_a_zip})+" "+
+($F{res_partner_a_city} == null ? "" :$F{res_partner_a_city})+" "+
+($F{res_province_code}== null ? "" :$F{res_province_code})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="176" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stampa Mastrini Partner]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="772" y="0" width="30" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="742" y="0" width="30" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pg.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="176" y="0" width="62" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Da Data]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="238" y="0" width="70" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{temp_partnerledger_p_fromdate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="308" y="0" width="62" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A Data]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="370" y="0" width="70" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{temp_partnerledger_p_todate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="15" isPrintWhenDetailOverflows="true"/>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement x="552" y="0" width="81" height="15">
+						<printWhenExpression><![CDATA[$F{temp_partnerledger_dare} >= 0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_dare}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="633" y="0" width="70" height="15">
+					<printWhenExpression><![CDATA[$F{temp_partnerledger_avere} >= 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_avere}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="703" y="0" width="99" height="15">
+					<printWhenExpression><![CDATA[$F{temp_partnerledger_saldo} >=0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_saldo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="67" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{temp_partnerledger_date_mov}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="333" y="0" width="219" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{temp_partnerledger_desc_mov}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="552" y="0" width="81" height="15" forecolor="#FF0000">
+					<printWhenExpression><![CDATA[$F{temp_partnerledger_dare} < 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_dare}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="633" y="0" width="70" height="15" forecolor="#FF0000">
+					<printWhenExpression><![CDATA[$F{temp_partnerledger_avere} < 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_avere}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="703" y="0" width="99" height="15" forecolor="#FF0000">
+					<printWhenExpression><![CDATA[$F{temp_partnerledger_saldo} < 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_saldo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="210" y="0" width="118" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="69" y="0" width="67" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{temp_partnerledger_ref}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="141" y="0" width="67" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{account_journal_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

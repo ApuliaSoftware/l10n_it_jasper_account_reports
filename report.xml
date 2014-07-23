@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<openerp>
+    <data >
+        <!-- REPORT  Partner Ledger-->
+        <record id="report_partner_ledger" model="ir.actions.report.xml">
+            <field name="name">Partner Ledger</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">account.move</field>
+            <field name="report_name">partner_ledger</field>
+            <field name="report_rml">l10n_it_jasper_account_reports/report/partner_ledger.jrxml</field>
+            <field name="report_type">pdf</field>
+            <field name="jasper_report">True</field>
+            <field name="jasper_output">pdf</field>
+        </record>
+
+</data>
+</openerp>

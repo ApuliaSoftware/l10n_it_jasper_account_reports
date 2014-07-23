@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <record id="wizard_partner_ledger" model="ir.ui.view">
+            <field name="name">wizard.partner.ledger</field>
+            <field name="model">wizard.partner.ledger</field>
+            <field name="arch" type="xml">
+                <form string="Print Partner Ledger" version="7.0">
+                    <group>
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                        <field name="partner_id"
+                            on_change="onchange_partner_id(partner_id)"/>
+                        <field name="customer"/>
+                        <field name="supplier"/>
+                        <newline/>
+                        <field name="export_csv"/>
+                    </group>
+                    <footer>
+                        <button string="Start" name="check_data" type="object" class="oe_highlight" colspan="2"/>
+                        
+                        o
+                        <button string="Cancel" special="cancel" class="oe_link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <act_window id="act_partner_ledger"
+            key2="client_action_multi"
+            name="Print Partner Ledger"
+            res_model="wizard.partner.ledger"
+            src_model="wizard.partner.ledger"
+            view_id="wizard_partner_ledger"
+            view_mode="form" target="new" view_type="form" />
+
+
+        <menuitem action="act_partner_ledger"
+            id="menu_jasper_partner_ledger"
+            parent="account.next_id_22"/>
+
+        <!-- EXPORT CSV VIEW -->
+
+        <record id="wizard_make_csv_partner_ledger" model="ir.ui.view">
+            <field name="name">make_csv_partner_ledger</field>
+            <field name="model">make_csv_partner_ledger</field>
+            <field name="arch" type="xml">
+                <form string="Export CSV" version="7.0">
+                    <group>
+                    <field name="state" invisible="1"/>
+                    <field name="data" readonly="1" filename="file_name"/>
+                    <field name="file_name" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button string="Export" name="makecsvpartnerledger" type="object" class="oe_highlight" colspan="2"/>
+                        <button special="cancel" string="Chiudi" type="object"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="act_export_partner_ledger"
+            key2="client_action_multi"
+            name="Export Partner Ledger"
+            res_model="make_csv_partner_ledger"
+            src_model="make_csv_partner_ledger"
+            view_id="wizard_make_csv_partner_ledger"
+            view_mode="form" target="new" view_type="form" />
+  </data>
+</openerp>

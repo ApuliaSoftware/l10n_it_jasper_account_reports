@@ -1,0 +1,428 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* l10n_it_jasper_account_reports
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-23 15:20+0000\n"
+"PO-Revision-Date: 2014-07-23 15:20+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "\"Partita IVA: \" + ($F{res_partner_a_vat} == null ? \"\": $F{res_partner_a_vat})+ \" Codice Fiscale: \" + ($F{res_partner_a_fiscalcode} == null ? \"\" :$F{res_partner_a_fiscalcode})"
+msgstr "\"Partita IVA: \" + ($F{res_partner_a_vat} == null ? \"\": $F{res_partner_a_vat})+ \" Codice Fiscale: \" + ($F{res_partner_a_fiscalcode} == null ? \"\" :$F{res_partner_a_fiscalcode})"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{account_journal_name}"
+msgstr "$F{account_journal_name}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{res_company_name}"
+msgstr "$F{res_company_name}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{res_partner_name}"
+msgstr "$F{res_partner_name}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_avere}"
+msgstr "$F{temp_partnerledger_avere}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_avere} < 0"
+msgstr "$F{temp_partnerledger_avere} < 0"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_avere} >= 0"
+msgstr "$F{temp_partnerledger_avere} >= 0"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_credito_ini}"
+msgstr "$F{temp_partnerledger_credito_ini}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_credito_ini} >= 0"
+msgstr "$F{temp_partnerledger_credito_ini} >= 0"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_dare}"
+msgstr "$F{temp_partnerledger_dare}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_dare} < 0"
+msgstr "$F{temp_partnerledger_dare} < 0"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_dare} >= 0"
+msgstr "$F{temp_partnerledger_dare} >= 0"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_date_mov}"
+msgstr "$F{temp_partnerledger_date_mov}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_debito_ini}"
+msgstr "$F{temp_partnerledger_debito_ini}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_debito_ini}>0"
+msgstr "$F{temp_partnerledger_debito_ini}>0"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_desc_mov}"
+msgstr "$F{temp_partnerledger_desc_mov}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_p_fromdate}"
+msgstr "$F{temp_partnerledger_p_fromdate}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_p_todate}"
+msgstr "$F{temp_partnerledger_p_todate}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_partner_id}"
+msgstr "$F{temp_partnerledger_partner_id}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_ref}"
+msgstr "$F{temp_partnerledger_ref}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_saldo}"
+msgstr "$F{temp_partnerledger_saldo}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_saldo} < 0"
+msgstr "$F{temp_partnerledger_saldo} < 0"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$F{temp_partnerledger_saldo} >=0"
+msgstr "$F{temp_partnerledger_saldo} >=0"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$V{PAGE_NUMBER}"
+msgstr "$V{PAGE_NUMBER}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$V{REPORT_COUNT}%2 == 0"
+msgstr "$V{REPORT_COUNT}%2 == 0"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$V{tot_avere}"
+msgstr "$V{tot_avere}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "$V{tot_dare}"
+msgstr "$V{tot_dare}"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "($F{res_partner_a_street} == null ? \"\": $F{res_partner_a_street})+\" \"+ ($F{res_partner_a_street2} == null ? \"\" :$F{res_partner_a_street2})"
+msgstr "($F{res_partner_a_street} == null ? \"\": $F{res_partner_a_street})+\" \"+ ($F{res_partner_a_street2} == null ? \"\" :$F{res_partner_a_street2})"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "($F{res_partner_a_zip} == null ? \"\": $F{res_partner_a_zip})+\" \"+ ($F{res_partner_a_city} == null ? \"\" :$F{res_partner_a_city})+\" \"+ ($F{res_province_code}== null ? \"\" :$F{res_province_code})"
+msgstr "($F{res_partner_a_zip} == null ? \"\": $F{res_partner_a_zip})+\" \"+ ($F{res_partner_a_city} == null ? \"\" :$F{res_partner_a_city})+\" \"+ ($F{res_province_code}== null ? \"\" :$F{res_province_code})"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "A Data"
+msgstr "A Data"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "Avere"
+msgstr "Avere"
+
+#. module: l10n_it_jasper_account_reports
+#: view:wizard.partner.ledger:0
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: l10n_it_jasper_account_reports
+#: view:make_csv_partner_ledger:0
+msgid "Chiudi"
+msgstr "Chiudi"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,p_company_id:0
+msgid "Company"
+msgstr "Company"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,credito_ini:0
+msgid "Credito Iniziale"
+msgstr "Credito Iniziale"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "Da Data"
+msgstr "Da Data"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "Dare"
+msgstr "Dare"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "Data"
+msgstr "Data"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,debito_ini:0
+msgid "Debito Iniziale"
+msgstr "Debito Iniziale"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,desc_mov:0
+msgid "Description"
+msgstr "Descrizione"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "Descrizione"
+msgstr "Descrizione"
+
+#. module: l10n_it_jasper_account_reports
+#: code:addons/l10n_it_jasper_account_reports/partner_ledger.py:177
+#, python-format
+msgid "Error"
+msgstr "Errore"
+
+#. module: l10n_it_jasper_account_reports
+#: code:addons/l10n_it_jasper_account_reports/partner_ledger.py:221
+#, python-format
+msgid "Error !"
+msgstr "Errore !"
+
+#. module: l10n_it_jasper_account_reports
+#: view:make_csv_partner_ledger:0
+msgid "Export"
+msgstr "Esporta"
+
+#. module: l10n_it_jasper_account_reports
+#: view:make_csv_partner_ledger:0
+msgid "Export CSV"
+msgstr "Export CSV"
+
+#. module: l10n_it_jasper_account_reports
+#: model:ir.actions.act_window,name:l10n_it_jasper_account_reports.act_export_partner_ledger
+msgid "Export Partner Ledger"
+msgstr "Esporta Mastro del Partner"
+
+#. module: l10n_it_jasper_account_reports
+#: field:wizard.partner.ledger,export_csv:0
+msgid "Export to CSV"
+msgstr "Esporta in CSV"
+
+#. module: l10n_it_jasper_account_reports
+#: field:make_csv_partner_ledger,data:0
+msgid "File"
+msgstr "File"
+
+#. module: l10n_it_jasper_account_reports
+#: field:make_csv_partner_ledger,file_name:0
+msgid "File Name"
+msgstr "Nome File"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,p_fromdate:0
+#: field:wizard.partner.ledger,from_date:0
+msgid "From Date"
+msgstr "Da Data"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "Giornale"
+msgstr "Giornale"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,invoice_id:0
+msgid "Invoice"
+msgstr "Fattura"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,journal_id:0
+msgid "Journal"
+msgstr "Giornale"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,date_mov:0
+msgid "Move Date"
+msgstr "Data Movimento"
+
+#. module: l10n_it_jasper_account_reports
+#: code:addons/l10n_it_jasper_account_reports/partner_ledger.py:178
+#, python-format
+msgid "Nothing to print, check the parameters"
+msgstr "Nulla da stampare, controlla i parametri"
+
+#. module: l10n_it_jasper_account_reports
+#: field:wizard.partner.ledger,customer:0
+msgid "Only Customer"
+msgstr "Clienti"
+
+#. module: l10n_it_jasper_account_reports
+#: field:wizard.partner.ledger,supplier:0
+msgid "Only Supplier"
+msgstr "Fornitori"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,ord_id:0
+msgid "Ordine"
+msgstr "Ordine"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+#: field:temp.partnerledger,partner_id:0
+#: field:wizard.partner.ledger,partner_id:0
+msgid "Partner"
+msgstr "Partner"
+
+#. module: l10n_it_jasper_account_reports
+#: model:ir.actions.report.xml,name:l10n_it_jasper_account_reports.report_partner_ledger
+msgid "Partner Ledger"
+msgstr "Mastro del partner"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,p_patner_name:0
+msgid "Partner Name"
+msgstr "Partner Name"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "Pg."
+msgstr "Pg."
+
+#. module: l10n_it_jasper_account_reports
+#: model:ir.actions.act_window,name:l10n_it_jasper_account_reports.act_partner_ledger
+#: model:ir.ui.menu,name:l10n_it_jasper_account_reports.menu_jasper_partner_ledger
+#: view:wizard.partner.ledger:0
+msgid "Print Partner Ledger"
+msgstr "Stampa Mastro dei Partner"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,ref:0
+msgid "Ref"
+msgstr "Ref"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "SELECT      temp_partnerledger.\"id\" AS temp_partnerledger_id,      temp_partnerledger.\"create_uid\" AS temp_partnerledger_create_uid,      temp_partnerledger.\"create_date\" AS temp_partnerledger_create_date,      temp_partnerledger.\"write_date\" AS temp_partnerledger_write_date,      temp_partnerledger.\"write_uid\" AS temp_partnerledger_write_uid,      temp_partnerledger.\"p_company_id\" AS temp_partnerledger_p_company_id,      temp_partnerledger.\"p_fromdate\" AS temp_partnerledger_p_fromdate,      temp_partnerledger.\"debito_ini\" AS temp_partnerledger_debito_ini,      temp_partnerledger.\"credito_ini\" AS temp_partnerledger_credito_ini,      temp_partnerledger.\"desc_mov\" AS temp_partnerledger_desc_mov,      temp_partnerledger.\"saldo\" AS temp_partnerledger_saldo,      temp_partnerledger.\"avere\" AS temp_partnerledger_avere,      temp_partnerledger.\"p_patner_name\" AS temp_partnerledger_p_patner_name,      temp_partnerledger.\"p_todate\" AS temp_partnerledger_p_todate,      temp_partnerledger.\"partner_id\" AS temp_partnerledger_partner_id,      temp_partnerledger.\"ord_id\" AS temp_partnerledger_ord_id,      temp_partnerledger.\"dare\" AS temp_partnerledger_dare,      temp_partnerledger.\"date_mov\" AS temp_partnerledger_date_mov,      temp_partnerledger.\"ref\" AS temp_partnerledger_ref,      temp_partnerledger.\"journal_id\" AS temp_partnerledger_journal_id,      res_partner.\"name\" AS res_partner_name,      res_partner_A.\"name\" AS res_partner_A_name,      res_partner_A.\"street\" AS res_partner_A_street,      res_partner_A.\"city\" AS res_partner_A_city,      res_partner_A.\"zip\" AS res_partner_A_zip,      res_partner_A.\"email\" AS res_partner_A_email,      res_partner_A.\"vat\" AS res_partner_A_vat,      res_partner_A.\"fax\" AS res_partner_A_fax,      res_partner_A.\"street2\" AS res_partner_A_street2,      res_partner_A.\"phone\" AS res_partner_A_phone,      res_partner_A.\"mobile\" AS res_partner_A_mobile,      res_partner_A.\"fiscalcode\" AS res_partner_A_fiscalcode,      res_province.\"code\" AS res_province_code,      res_province.\"name\" AS res_province_name,      account_journal.\"name\" AS account_journal_name,      res_company.\"name\" AS res_company_name FROM      \"public\".\"res_company\" res_company RIGHT OUTER JOIN \"public\".\"temp_partnerledger\" temp_partnerledger ON res_company.\"id\" = temp_partnerledger.\"p_company_id\"      LEFT OUTER JOIN \"public\".\"res_partner\" res_partner ON temp_partnerledger.\"partner_id\" = res_partner.\"id\"      LEFT OUTER JOIN \"public\".\"account_journal\" account_journal ON temp_partnerledger.\"journal_id\" = account_journal.\"id\"      LEFT OUTER JOIN \"public\".\"res_partner\" res_partner_A ON res_company.\"partner_id\" = res_partner_A.\"id\"      LEFT OUTER JOIN \"public\".\"res_province\" res_province ON res_partner_A.\"province\" = res_province.\"id\" ORDER BY      temp_partnerledger.\"partner_id\" ASC,      temp_partnerledger.\"ord_id\" ASC"
+msgstr "SELECT      temp_partnerledger.\"id\" AS temp_partnerledger_id,      temp_partnerledger.\"create_uid\" AS temp_partnerledger_create_uid,      temp_partnerledger.\"create_date\" AS temp_partnerledger_create_date,      temp_partnerledger.\"write_date\" AS temp_partnerledger_write_date,      temp_partnerledger.\"write_uid\" AS temp_partnerledger_write_uid,      temp_partnerledger.\"p_company_id\" AS temp_partnerledger_p_company_id,      temp_partnerledger.\"p_fromdate\" AS temp_partnerledger_p_fromdate,      temp_partnerledger.\"debito_ini\" AS temp_partnerledger_debito_ini,      temp_partnerledger.\"credito_ini\" AS temp_partnerledger_credito_ini,      temp_partnerledger.\"desc_mov\" AS temp_partnerledger_desc_mov,      temp_partnerledger.\"saldo\" AS temp_partnerledger_saldo,      temp_partnerledger.\"avere\" AS temp_partnerledger_avere,      temp_partnerledger.\"p_patner_name\" AS temp_partnerledger_p_patner_name,      temp_partnerledger.\"p_todate\" AS temp_partnerledger_p_todate,      temp_partnerledger.\"partner_id\" AS temp_partnerledger_partner_id,      temp_partnerledger.\"ord_id\" AS temp_partnerledger_ord_id,      temp_partnerledger.\"dare\" AS temp_partnerledger_dare,      temp_partnerledger.\"date_mov\" AS temp_partnerledger_date_mov,      temp_partnerledger.\"ref\" AS temp_partnerledger_ref,      temp_partnerledger.\"journal_id\" AS temp_partnerledger_journal_id,      res_partner.\"name\" AS res_partner_name,      res_partner_A.\"name\" AS res_partner_A_name,      res_partner_A.\"street\" AS res_partner_A_street,      res_partner_A.\"city\" AS res_partner_A_city,      res_partner_A.\"zip\" AS res_partner_A_zip,      res_partner_A.\"email\" AS res_partner_A_email,      res_partner_A.\"vat\" AS res_partner_A_vat,      res_partner_A.\"fax\" AS res_partner_A_fax,      res_partner_A.\"street2\" AS res_partner_A_street2,      res_partner_A.\"phone\" AS res_partner_A_phone,      res_partner_A.\"mobile\" AS res_partner_A_mobile,      res_partner_A.\"fiscalcode\" AS res_partner_A_fiscalcode,      res_province.\"code\" AS res_province_code,      res_province.\"name\" AS res_province_name,      account_journal.\"name\" AS account_journal_name,      res_company.\"name\" AS res_company_name FROM      \"public\".\"res_company\" res_company RIGHT OUTER JOIN \"public\".\"temp_partnerledger\" temp_partnerledger ON res_company.\"id\" = temp_partnerledger.\"p_company_id\"      LEFT OUTER JOIN \"public\".\"res_partner\" res_partner ON temp_partnerledger.\"partner_id\" = res_partner.\"id\"      LEFT OUTER JOIN \"public\".\"account_journal\" account_journal ON temp_partnerledger.\"journal_id\" = account_journal.\"id\"      LEFT OUTER JOIN \"public\".\"res_partner\" res_partner_A ON res_company.\"partner_id\" = res_partner_A.\"id\"      LEFT OUTER JOIN \"public\".\"res_province\" res_province ON res_partner_A.\"province\" = res_province.\"id\" ORDER BY      temp_partnerledger.\"partner_id\" ASC,      temp_partnerledger.\"ord_id\" ASC"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+#: field:temp.partnerledger,saldo:0
+msgid "Saldo"
+msgstr "Saldo"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "Saldo iniziale al"
+msgstr "Saldo iniziale al"
+
+#. module: l10n_it_jasper_account_reports
+#: code:addons/l10n_it_jasper_account_reports/partner_ledger.py:222
+#, python-format
+msgid "Select customer or supplier"
+msgstr "Seleziona clienti oppure fornitori"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "Stampa Mastrini Partner"
+msgstr "Stampa Mastrini Partner"
+
+#. module: l10n_it_jasper_account_reports
+#: view:wizard.partner.ledger:0
+msgid "Start"
+msgstr "Stampa"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,p_todate:0
+#: field:wizard.partner.ledger,to_date:0
+msgid "To Date"
+msgstr "A Data"
+
+#. module: l10n_it_jasper_account_reports
+#: report:partner_ledger:0
+msgid "Voce"
+msgstr "Voce"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,avere:0
+msgid "avere"
+msgstr "avere"
+
+#. module: l10n_it_jasper_account_reports
+#: selection:make_csv_partner_ledger,state:0
+msgid "choose"
+msgstr "choose"
+
+#. module: l10n_it_jasper_account_reports
+#: field:temp.partnerledger,dare:0
+msgid "dare"
+msgstr "dare"
+
+#. module: l10n_it_jasper_account_reports
+#: selection:make_csv_partner_ledger,state:0
+msgid "get"
+msgstr "get"
+
+#. module: l10n_it_jasper_account_reports
+#: model:ir.model,name:l10n_it_jasper_account_reports.model_make_csv_partner_ledger
+msgid "make_csv_partner_ledger"
+msgstr "make_csv_partner_ledger"
+
+#. module: l10n_it_jasper_account_reports
+#: model:ir.model,name:l10n_it_jasper_account_reports.model_temp_partnerledger
+msgid "temp.partnerledger"
+msgstr "temp.partnerledger"
+
+#. module: l10n_it_jasper_account_reports
+#: field:make_csv_partner_ledger,state:0
+msgid "unknown"
+msgstr "unknown"
+
+#. module: l10n_it_jasper_account_reports
+#: model:ir.model,name:l10n_it_jasper_account_reports.model_wizard_partner_ledger
+msgid "wizard.partner.ledger"
+msgstr "wizard.partner.ledger"
+

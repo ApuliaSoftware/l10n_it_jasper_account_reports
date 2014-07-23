@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+
+TMPPL_temp_partnerledger, temp_partnerledger security,model_temp_partnerledger,,1,1,1,1
+
