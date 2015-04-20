@@ -189,6 +189,7 @@ class wizard_partner_ledger(orm.TransientModel):
         'customer': fields.boolean('Only Customer'),
         'supplier': fields.boolean('Only Supplier'),
         'export_csv': fields.boolean('Export to CSV'),
+        'vertical': fields.boolean('Vertical Print')
         }
 
     _defaults = {
@@ -206,9 +207,13 @@ class wizard_partner_ledger(orm.TransientModel):
         data['model'] = context.get('active_model', 'ir.ui.menu')
         data['form'] = {}
         data['form']['parameters'] = {}
+        this = self.browse(cr, uid, ids, context)[0]
+        report_name = 'partner_ledger'
+        if this.vertical:
+            report_name = 'partner_ledger_vertical'
 
         return {'type': 'ir.actions.report.xml',
-                'report_name': 'partner_ledger',
+                'report_name': report_name,
                 'datas': data,
                 }
 

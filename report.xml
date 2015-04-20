@@ -13,5 +13,17 @@
             <field name="jasper_output">pdf</field>
         </record>
 
+        <!-- REPORT  Vertical Partner Ledger-->
+        <record id="report_vertical_partner_ledger" model="ir.actions.report.xml">
+            <field name="name">Vertical Partner Ledger</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">account.move</field>
+            <field name="report_name">partner_ledger_vertical</field>
+            <field name="report_rml">l10n_it_jasper_account_reports/report/partner_ledger_vertical.jrxml</field>
+            <field name="report_type">pdf</field>
+            <field name="jasper_report">True</field>
+            <field name="jasper_output">pdf</field>
+        </record>
+
 </data>
 </openerp>
