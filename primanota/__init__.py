@@ -19,21 +19,4 @@
 #
 ##############################################################################
 
-{
-    'name': "Jasper Accounts Reports",
-    'version': '0.1',
-    'category': 'Reports',
-    'description': """Account Reports for Jasper""",
-    'author': 'Apulia Software S.r.l.',
-    'website': 'info@apuliasoftware.it',
-    'license': 'AGPL-3',
-    "depends": ['jasper_reports','account'],
-    "init_xml": [
-        'security/ir.model.access.csv',
-        'partner_ledger_view.xml',
-        'primanota/primanota_view.xml',
-        'report.xml',   
-        ],
-    "active": False,
-    "installable": True
-}
+from . import report_primanota

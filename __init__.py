@@ -19,4 +19,6 @@
 #
 ##############################################################################
 
-import partner_ledger
+from . import partner_ledger
+from . import primanota
+

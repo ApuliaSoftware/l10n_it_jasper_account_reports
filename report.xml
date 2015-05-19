@@ -25,5 +25,18 @@
             <field name="jasper_output">pdf</field>
         </record>
 
+        <!-- REPORT PrimaNota -->
+
+        <record id="report_stampa_primanota" model="ir.actions.report.xml">
+            <field name="name">Stampa Primanota</field>
+            <field name="type">ir.actions.report.xml</field>
+            <field name="model">tempstampprinot</field>
+            <field name="report_name">StPrimaNota</field>
+            <field name="report_rml">l10n_it_jasper_account_reports/report/StPrimaNota.jrxml</field>
+            <field name="report_type">pdf</field>
+            <field name="jasper_report">True</field>
+            <field name="jasper_output">pdf</field>
+        </record>
+
 </data>
 </openerp>

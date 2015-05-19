@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <record id="view_stampa_primanota" model="ir.ui.view">
+        <field name="name">Stampa Prima Nota</field>
+        <field name="model">stampa.primanota</field>
+        <field name="arch" type="xml">
+           <form string="Stampa Prima Nota" version="7.0">
+                <group colspan="4" string="Stampa Prima Nota">
+                <field name="from_date" colspan="4"/>
+                <field name="to_date" colspan="4"/>
+                </group>
+                <group colspan="4">
+                    <label for="journal_ids"/>
+                    <newline/>
+                    <field name="journal_ids" nolabel="1" colspan="4">
+                    </field>
+                    <field name="export_csv"/>
+                </group>
+                <footer>
+                    <button name="genera_stampa_primanota"
+                            string="Lancia Calcolo" type="object"
+                            class="oe_highlight"/>
+                    o
+                    <button special="cancel" string="Annulla"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window name="Stampa Prima Nota"
+        res_model="stampa.primanota"
+        src_model="account.move"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"
+        id="act_stampa_primanota"/>
+
+    <menuitem action="act_stampa_primanota"
+              id="menu_jasper_stampa_prima_nota"
+              parent="account.menu_finance_generic_reporting"/>
+
+    <record id="wizard_gencsvpnt" model="ir.ui.view">
+        <field name="name">Genera File Csv Prima Nota</field>
+        <field name="model">crea_csv_pnt</field>
+        <field name="arch" type="xml">
+            <form string="Genera Csv Prima Nota">
+                <field name="state" invisible="1" colspan="4"/>
+                <group col="4" states="choose">
+                    <group colspan="4" >
+                        <newline />
+                        <button special="cancel" string="Cancel"/>
+                        <button name="generacsvpnt"
+                                string="Export" type="object"/>
+                    </group>
+                    <group colspan="4" states="get">
+                        <field name="data" readonly="1"/>
+                        <field name="filename"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <act_window name="Genera File Csv Prima Nota"
+        res_model="crea_csv_pnt"
+        src_model="crea_csv_pnt"
+        view_mode="form"
+        target="new"
+        key2="client_action_multi"
+        id="action_wizard_gencsvpnt"
+        view_id="wizard_gencsvpnt"/>
+
+</data>
+</openerp>

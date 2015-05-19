@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        
         <record id="wizard_partner_ledger" model="ir.ui.view">
             <field name="name">wizard.partner.ledger</field>
             <field name="model">wizard.partner.ledger</field>
@@ -15,7 +14,7 @@
                         <field name="customer"/>
                         <field name="supplier"/>
                         <newline/>
-                        <field name="vertical_print"/>
+                        <field name="vertical"/>
                         <newline/>
                         <field name="export_csv"/>
                     </group>
@@ -40,10 +39,9 @@
 
         <menuitem action="act_partner_ledger"
             id="menu_jasper_partner_ledger"
-            parent="account.next_id_22"/>
+            parent="account.menu_finance_generic_reporting"/>
 
         <!-- EXPORT CSV VIEW -->
-
         <record id="wizard_make_csv_partner_ledger" model="ir.ui.view">
             <field name="name">make_csv_partner_ledger</field>
             <field name="model">make_csv_partner_ledger</field>
