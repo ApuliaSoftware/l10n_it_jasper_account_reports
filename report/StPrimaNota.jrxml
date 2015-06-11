@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StPrimaNota" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT  account_id,
+       numreg, data_doc_partita, data_doc, to_date, narration,
+       date, numero_doc_partita, imponibile, partner_id, numero_doc,
+       desriga, data_scadenza, tax_amount, account_tax_id, numpartita,
+       tax_code_id, credit, from_date, debit, ref, protocollo, importo_incpag,
+       des_partner, account_name, account_code
+  FROM tempstampprinot]]>
+	</queryString>
+	<field name="account_id" class="java.lang.Integer"/>
+	<field name="numreg" class="java.lang.String">
+		<fieldDescription><![CDATA[Numero Reg]]></fieldDescription>
+	</field>
+	<field name="data_doc_partita" class="java.sql.Date">
+		<fieldDescription><![CDATA[Data Doc. Partita]]></fieldDescription>
+	</field>
+	<field name="data_doc" class="java.sql.Date">
+		<fieldDescription><![CDATA[Data Documento]]></fieldDescription>
+	</field>
+	<field name="to_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[To]]></fieldDescription>
+	</field>
+	<field name="narration" class="java.lang.String">
+		<fieldDescription><![CDATA[Internal Note]]></fieldDescription>
+	</field>
+	<field name="date" class="java.sql.Date">
+		<fieldDescription><![CDATA[Expiration Date]]></fieldDescription>
+	</field>
+	<field name="numero_doc_partita" class="java.lang.String">
+		<fieldDescription><![CDATA[Numero Doc Partita]]></fieldDescription>
+	</field>
+	<field name="imponibile" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Totale Imponibile]]></fieldDescription>
+	</field>
+	<field name="partner_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Customer]]></fieldDescription>
+	</field>
+	<field name="numero_doc" class="java.lang.String">
+		<fieldDescription><![CDATA[Numero Doc.]]></fieldDescription>
+	</field>
+	<field name="desriga" class="java.lang.String">
+		<fieldDescription><![CDATA[Descrizione RIga]]></fieldDescription>
+	</field>
+	<field name="data_scadenza" class="java.sql.Date">
+		<fieldDescription><![CDATA[Data Scadenza]]></fieldDescription>
+	</field>
+	<field name="tax_amount" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Tax Code Amount]]></fieldDescription>
+	</field>
+	<field name="account_tax_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Tax]]></fieldDescription>
+	</field>
+	<field name="numpartita" class="java.lang.String">
+		<fieldDescription><![CDATA[Numero Partita Saldata]]></fieldDescription>
+	</field>
+	<field name="tax_code_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Tax Code]]></fieldDescription>
+	</field>
+	<field name="credit" class="java.math.BigDecimal"/>
+	<field name="from_date" class="java.sql.Date">
+		<fieldDescription><![CDATA[From]]></fieldDescription>
+	</field>
+	<field name="debit" class="java.math.BigDecimal"/>
+	<field name="ref" class="java.lang.String">
+		<fieldDescription><![CDATA[Ref.]]></fieldDescription>
+	</field>
+	<field name="protocollo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Protocollo]]></fieldDescription>
+	</field>
+	<field name="importo_incpag" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[Importo Inc.Pag]]></fieldDescription>
+	</field>
+	<field name="des_partner" class="java.lang.String">
+		<fieldDescription><![CDATA[Ragione Sociale]]></fieldDescription>
+	</field>
+	<field name="account_name" class="java.lang.String">
+		<fieldDescription><![CDATA[Des. Conto]]></fieldDescription>
+	</field>
+	<field name="account_code" class="java.lang.String">
+		<fieldDescription><![CDATA[Codice Conto]]></fieldDescription>
+	</field>
+	<sortField name="numreg"/>
+	<group name="Registrazione" isReprintHeaderOnEachPage="true" keepTogether="true">
+		<groupExpression><![CDATA[$F{numreg}]]></groupExpression>
+		<groupHeader>
+			<band height="64">
+				<line>
+					<reportElement x="0" y="58" width="802" height="1"/>
+				</line>
+				<staticText>
+					<reportElement x="0" y="32" width="62" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Registrazione]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="60" y="32" width="45" height="12"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Data Reg.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="60" y="45" width="45" height="13"/>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Data Doc.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="462" y="-33" width="94" height="14">
+						<printWhenExpression><![CDATA[false]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Num Doc]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="643" y="-33" width="100" height="13">
+						<printWhenExpression><![CDATA[false]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Note]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="145" y="32" width="117" height="12"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Des.RIga]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="315" y="32" width="183" height="12"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Conto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="545" y="32" width="118" height="12"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Partner]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="718" y="32" width="40" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Dare]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="762" y="32" width="40" height="12"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Avere]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="9">
+				<line>
+					<reportElement x="0" y="4" width="802" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="6" y="0" width="309" height="32"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stampa Prima Nota]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="587" y="15" width="37" height="16">
+					<printWhenExpression><![CDATA[false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{protocollo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="591" y="0" width="33" height="13">
+					<printWhenExpression><![CDATA[false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prot.]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="458" y="14" width="100" height="14">
+					<printWhenExpression><![CDATA[false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numero_doc}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="638" y="14" width="222" height="16">
+					<printWhenExpression><![CDATA[false]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{narration}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="545" y="0" width="173" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{des_partner}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="718" y="0" width="40" height="14" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{debit}!= 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{debit}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;###0.00-" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="762" y="0" width="40" height="14" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{credit}!= 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{credit}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="60" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numreg}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="60" y="0" width="50" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="60" y="14" width="50" height="14"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{data_doc}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" mode="Transparent" x="145" y="0" width="148" height="14" isRemoveLineWhenBlank="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{desriga}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="315" y="0" width="83" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{account_code}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="398" y="0" width="141" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement>
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{account_name}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="16">
+			<printWhenExpression><![CDATA[$F{numpartita}]]></printWhenExpression>
+			<textField>
+				<reportElement x="242" y="4" width="100" height="12"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numpartita}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="342" y="4" width="100" height="12"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{data_scadenza}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="462" y="4" width="262" height="12"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numero_doc_partita}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00" isBlankWhenNull="true">
+				<reportElement x="735" y="4" width="64" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{importo_incpag}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="678" y="7" width="80" height="12"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pagina "+$V{PAGE_NUMBER}+" di"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="758" y="7" width="40" height="12"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="3" y="7" width="100" height="12"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
