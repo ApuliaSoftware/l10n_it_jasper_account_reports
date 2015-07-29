@@ -55,7 +55,8 @@ FROM
      LEFT OUTER JOIN "public"."res_province" res_province ON res_partner_A."province" = res_province."id"
 ORDER BY
      temp_partnerledger."partner_id" ASC,
-     temp_partnerledger."ord_id" ASC]]>
+     temp_partnerledger."ord_id" ASC
+     ]]>
 	</queryString>
 	<field name="temp_partnerledger_id" class="java.lang.Integer"/>
 	<field name="temp_partnerledger_create_uid" class="java.lang.Integer"/>
@@ -102,7 +103,7 @@ ORDER BY
 	<group name="partner" isStartNewPage="true">
 		<groupExpression><![CDATA[$F{temp_partnerledger_partner_id}]]></groupExpression>
 		<groupHeader>
-			<band height="64">
+			<band height="69">
 				<staticText>
 					<reportElement x="0" y="0" width="57" height="20"/>
 					<textElement verticalAlignment="Middle">
@@ -136,21 +137,21 @@ ORDER BY
 					<text><![CDATA[Data]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="294" y="45" width="91" height="15"/>
+					<reportElement x="294" y="45" width="76" height="15"/>
 					<textElement>
 						<font isBold="true" isItalic="true"/>
 					</textElement>
 					<text><![CDATA[Descrizione]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="396" y="45" width="56" height="15"/>
+					<reportElement x="370" y="45" width="69" height="15"/>
 					<textElement textAlignment="Right">
 						<font isBold="true" isItalic="true"/>
 					</textElement>
 					<text><![CDATA[Dare]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="452" y="45" width="49" height="15"/>
+					<reportElement x="438" y="45" width="63" height="15"/>
 					<textElement textAlignment="Right">
 						<font isBold="true" isItalic="true"/>
 					</textElement>
@@ -171,7 +172,7 @@ ORDER BY
 					<textElement>
 						<font isBold="true" isItalic="true"/>
 					</textElement>
-					<text><![CDATA[Voce]]></text>
+					<text><![CDATA[Protocollo]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="141" y="45" width="67" height="15"/>
@@ -219,14 +220,14 @@ ORDER BY
 					<reportElement x="0" y="3" width="555" height="1"/>
 				</line>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-					<reportElement x="452" y="4" width="49" height="20"/>
+					<reportElement x="440" y="4" width="61" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="8" isBold="true" isItalic="true"/>
 					</textElement>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{tot_avere}]]></textFieldExpression>
 				</textField>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-					<reportElement x="396" y="4" width="56" height="20"/>
+					<reportElement x="370" y="4" width="69" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="8" isBold="true" isItalic="true"/>
 					</textElement>
@@ -333,7 +334,7 @@ ORDER BY
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="555" height="15" isPrintWhenDetailOverflows="true"/>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-					<reportElement x="396" y="0" width="56" height="15">
+					<reportElement x="370" y="0" width="70" height="15">
 						<printWhenExpression><![CDATA[$F{temp_partnerledger_dare} >= 0]]></printWhenExpression>
 					</reportElement>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -342,8 +343,8 @@ ORDER BY
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_dare}]]></textFieldExpression>
 				</textField>
 			</frame>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="454" y="0" width="47" height="15">
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="440" y="0" width="61" height="15">
 					<printWhenExpression><![CDATA[$F{temp_partnerledger_avere} >= 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -351,7 +352,7 @@ ORDER BY
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_avere}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="501" y="0" width="54" height="15">
 					<printWhenExpression><![CDATA[$F{temp_partnerledger_saldo} >=0]]></printWhenExpression>
 				</reportElement>
@@ -360,7 +361,7 @@ ORDER BY
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_saldo}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="67" height="15"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
@@ -368,14 +369,14 @@ ORDER BY
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{temp_partnerledger_date_mov}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="294" y="0" width="102" height="15"/>
+				<reportElement x="294" y="0" width="76" height="15"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{temp_partnerledger_desc_mov}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="396" y="0" width="56" height="15" forecolor="#FF0000">
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="370" y="0" width="69" height="15" forecolor="#FF0000">
 					<printWhenExpression><![CDATA[$F{temp_partnerledger_dare} < 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -383,8 +384,8 @@ ORDER BY
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_dare}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-				<reportElement x="454" y="0" width="47" height="15" forecolor="#FF0000">
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="440" y="0" width="61" height="15" forecolor="#FF0000">
 					<printWhenExpression><![CDATA[$F{temp_partnerledger_avere} < 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -392,7 +393,7 @@ ORDER BY
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_avere}]]></textFieldExpression>
 			</textField>
-			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="501" y="0" width="54" height="15" forecolor="#FF0000">
 					<printWhenExpression><![CDATA[$F{temp_partnerledger_saldo} < 0]]></printWhenExpression>
 				</reportElement>

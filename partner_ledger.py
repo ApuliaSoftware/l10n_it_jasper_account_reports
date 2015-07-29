@@ -164,7 +164,7 @@ class temp_partnerledger(orm.Model):
                 ord = 0
                 temp_ids = self.search(
                     cr, uid, [('partner_id', '=', partner.id)],
-                    order='date_mov')
+                    order='date_mov, ref')
                 if temp_ids:
                     for riga in self.browse(cr, uid, temp_ids):
                         saldo += riga.dare - riga.avere

@@ -149,7 +149,7 @@
 					<text><![CDATA[Avere]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="0" y="15" width="62" height="12"/>
+					<reportElement x="112" y="15" width="62" height="12"/>
 					<textElement>
 						<font fontName="SansSerif" size="8" isBold="true"/>
 					</textElement>
