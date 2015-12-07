@@ -27,7 +27,11 @@
     'author': 'Apulia Software S.r.l.',
     'website': 'info@apuliasoftware.it',
     'license': 'AGPL-3',
-    "depends": ['jasper_reports','account'],
+    "depends": [
+        'jasper_reports',
+        'account',
+        'account_due_list',
+    ],
     "data": [
         'security/ir.model.access.csv',
         'partner_ledger_view.xml',
