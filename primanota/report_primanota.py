@@ -37,6 +37,7 @@ class Tempstampprinot(orm.Model):
     _columns = {
         'from_date': fields.date('Da Data Registrazione '),
         'to_date': fields.date('A Data Registrazione'),
+        'sel_journal': fields.text('Giornali Selezionati'),
         'numreg': fields.char('Numero Reg', size=64, required=True),
         'ref': fields.char('Descrizione Registrazione', size=64),
         'date': fields.date('Data Reg'),
@@ -97,14 +98,16 @@ class StampaPrimanota(orm.TransientModel):
         param = self.browse(cr, uid, ids[0])
         cerca = [('date', '>=', param.from_date),
                  ('date', '<=', param.to_date)]
+        sel_journal = 'Tutti'
         if this.journal_ids:
             journals = []
             for selected_journal in this.journal_ids:
                 journals.append(selected_journal.id)
             cerca.append(('journal_id', 'in', journals))
+            sel_journal = ' / '.join([j.name for j in this.journal_ids])
         ids_move = moveobj.search(cr, uid, cerca)
         if not ids_move:
-            raise osv.except_osv(_('Attenzione !'), _(
+            raise orm.except_orm(('Attenzione !'), (
                 'Non ci sono Registrazioni per Questa Selezione'))
         for move in moveobj.browse(cr, uid, ids_move):
             testa = {
@@ -115,6 +118,7 @@ class StampaPrimanota(orm.TransientModel):
                 'date': move.date,
                 'narration': move.narration,
                 'numero_doc': move.ref,
+                'sel_journal': sel_journal,
                 }
             for move_line in move.line_id:
                 riga = {
