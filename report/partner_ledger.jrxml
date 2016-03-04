@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="partner_ledger" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="48"/>
+	<property name="ireport.x" value="24"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Righe" mode="Opaque" fill="Solid">
 		<conditionalStyle>
@@ -31,6 +31,7 @@
      temp_partnerledger."date_mov" AS temp_partnerledger_date_mov,
      temp_partnerledger."ref" AS temp_partnerledger_ref,
      temp_partnerledger."journal_id" AS temp_partnerledger_journal_id,
+     temp_partnerledger."invoice_id" AS temp_partnerledger_invoice_id,
      res_partner."name" AS res_partner_name,
      res_partner_A."name" AS res_partner_A_name,
      res_partner_A."street" AS res_partner_A_street,
@@ -46,13 +47,16 @@
      res_province."code" AS res_province_code,
      res_province."name" AS res_province_name,
      account_journal."name" AS account_journal_name,
-     res_company."name" AS res_company_name
+     res_company."name" AS res_company_name,
+account_invoice.supplier_invoice_number, account_invoice.date_invoice
 FROM
      "public"."res_company" res_company RIGHT OUTER JOIN "public"."temp_partnerledger" temp_partnerledger ON res_company."id" = temp_partnerledger."p_company_id"
      LEFT OUTER JOIN "public"."res_partner" res_partner ON temp_partnerledger."partner_id" = res_partner."id"
      LEFT OUTER JOIN "public"."account_journal" account_journal ON temp_partnerledger."journal_id" = account_journal."id"
      LEFT OUTER JOIN "public"."res_partner" res_partner_A ON res_company."partner_id" = res_partner_A."id"
      LEFT OUTER JOIN "public"."res_province" res_province ON res_partner_A."province" = res_province."id"
+LEFT OUTER JOIN account_invoice on temp_partnerledger."invoice_id" = account_invoice.id
+
 ORDER BY
      temp_partnerledger."partner_id" ASC,
      temp_partnerledger."ord_id" ASC]]>
@@ -77,6 +81,7 @@ ORDER BY
 	<field name="temp_partnerledger_date_mov" class="java.sql.Date"/>
 	<field name="temp_partnerledger_ref" class="java.lang.String"/>
 	<field name="temp_partnerledger_journal_id" class="java.lang.Integer"/>
+	<field name="temp_partnerledger_invoice_id" class="java.lang.Integer"/>
 	<field name="res_partner_name" class="java.lang.String"/>
 	<field name="res_partner_a_name" class="java.lang.String"/>
 	<field name="res_partner_a_street" class="java.lang.String"/>
@@ -93,6 +98,12 @@ ORDER BY
 	<field name="res_province_name" class="java.lang.String"/>
 	<field name="account_journal_name" class="java.lang.String"/>
 	<field name="res_company_name" class="java.lang.String"/>
+	<field name="supplier_invoice_number" class="java.lang.String">
+		<fieldDescription><![CDATA[Supplier Invoice Number]]></fieldDescription>
+	</field>
+	<field name="date_invoice" class="java.sql.Date">
+		<fieldDescription><![CDATA[Invoice Date]]></fieldDescription>
+	</field>
 	<variable name="tot_dare" class="java.math.BigDecimal" resetType="Group" resetGroup="partner" calculation="Sum">
 		<variableExpression><![CDATA[$F{temp_partnerledger_dare}]]></variableExpression>
 	</variable>
@@ -157,7 +168,7 @@ ORDER BY
 					<text><![CDATA[Data]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="333" y="45" width="208" height="15"/>
+					<reportElement x="413" y="45" width="139" height="15"/>
 					<textElement>
 						<font isBold="true" isItalic="true"/>
 					</textElement>
@@ -207,6 +218,20 @@ ORDER BY
 						<font isBold="true" isItalic="true"/>
 					</textElement>
 					<text><![CDATA[Partner]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="328" y="45" width="35" height="15"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Rif. Ft.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="363" y="45" width="43" height="15"/>
+					<textElement>
+						<font size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Data Ft.]]></text>
 				</staticText>
 			</band>
 		</groupHeader>
@@ -339,6 +364,13 @@ ORDER BY
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_dare}]]></textFieldExpression>
 				</textField>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement x="363" y="0" width="50" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{date_invoice}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="633" y="0" width="70" height="15">
@@ -360,7 +392,7 @@ ORDER BY
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{temp_partnerledger_date_mov}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="333" y="0" width="219" height="15"/>
+				<reportElement x="413" y="0" width="139" height="15"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{temp_partnerledger_desc_mov}]]></textFieldExpression>
 			</textField>
@@ -399,6 +431,13 @@ ORDER BY
 				<reportElement x="141" y="0" width="67" height="15"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{account_journal_name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="328" y="0" width="35" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{supplier_invoice_number}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
