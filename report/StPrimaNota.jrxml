@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StPrimaNota" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="11"/>
+	<property name="ireport.zoom" value="1.3310000000000008"/>
+	<property name="ireport.x" value="22"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Righe" mode="Opaque">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
@@ -15,10 +15,11 @@
        date, numero_doc_partita, imponibile, tempstampprinot.partner_id, numero_doc,
        desriga, data_scadenza, tax_amount, account_tax_id, numpartita,
        tax_code_id, credit, from_date, debit, ref, protocollo, importo_incpag,
-       des_partner, account_name, account_code, sel_journal, res_company.name as company_name
+       des_partner, account_name, account_code, sel_journal, res_company.name as company_name, journal_name, nr_invoice, supplier_invoice
   FROM tempstampprinot
 LEFT OUTER JOIN res_users ON res_users.id = tempstampprinot.create_uid
-LEFT OUTER JOIN res_company on res_company.id = res_users.company_id]]>
+LEFT OUTER JOIN res_company on res_company.id = res_users.company_id
+ORDER BY journal_name ASC, date ASC, numreg ASC]]>
 	</queryString>
 	<field name="account_id" class="java.lang.Integer"/>
 	<field name="numreg" class="java.lang.String">
@@ -96,70 +97,134 @@ LEFT OUTER JOIN res_company on res_company.id = res_users.company_id]]>
 		<fieldDescription><![CDATA[Giornali Selezionati]]></fieldDescription>
 	</field>
 	<field name="company_name" class="java.lang.String"/>
-	<sortField name="numreg"/>
+	<field name="journal_name" class="java.lang.String">
+		<fieldDescription><![CDATA[Supplier Invoice]]></fieldDescription>
+	</field>
+	<field name="nr_invoice" class="java.lang.String">
+		<fieldDescription><![CDATA[Supplier Invoice]]></fieldDescription>
+	</field>
+	<field name="supplier_invoice" class="java.lang.String">
+		<fieldDescription><![CDATA[Supplier Invoice]]></fieldDescription>
+	</field>
 	<group name="Registrazione" isReprintHeaderOnEachPage="true" keepTogether="true">
 		<groupExpression><![CDATA[$F{numreg}]]></groupExpression>
 		<groupHeader>
-			<band height="35">
+			<band height="16">
 				<line>
-					<reportElement x="0" y="31" width="802" height="1"/>
+					<reportElement x="0" y="14" width="802" height="1"/>
 				</line>
 				<staticText>
-					<reportElement x="0" y="5" width="62" height="12"/>
-					<textElement>
+					<reportElement mode="Opaque" x="0" y="0" width="25" height="13" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
 						<font fontName="SansSerif" size="8" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Registrazione]]></text>
+					<text><![CDATA[Sez.]]></text>
 				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" mode="Opaque" x="25" y="0" width="79" height="13" printWhenGroupChanges="Registrazione" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{journal_name}]]></textFieldExpression>
+				</textField>
 				<staticText>
-					<reportElement x="79" y="5" width="45" height="12"/>
-					<textElement>
+					<reportElement mode="Opaque" x="104" y="0" width="22" height="13" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
 						<font fontName="SansSerif" size="8" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Data Reg.]]></text>
+					<text><![CDATA[Reg.]]></text>
 				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" mode="Opaque" x="123" y="0" width="79" height="13" printWhenGroupChanges="Registrazione" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{numreg}]]></textFieldExpression>
+				</textField>
 				<staticText>
-					<reportElement x="79" y="18" width="45" height="13"/>
-					<textElement>
+					<reportElement mode="Opaque" x="194" y="0" width="45" height="13" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
 						<font fontName="SansSerif" size="8" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Data Doc.]]></text>
+					<text><![CDATA[Dt. Reg.]]></text>
 				</staticText>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" mode="Opaque" x="234" y="0" width="48" height="13" printWhenGroupChanges="Registrazione" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{date}]]></textFieldExpression>
+				</textField>
 				<staticText>
-					<reportElement x="145" y="5" width="117" height="12"/>
-					<textElement>
+					<reportElement mode="Opaque" x="282" y="0" width="45" height="13" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Dt.Doc]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" mode="Opaque" x="315" y="0" width="48" height="13" printWhenGroupChanges="Registrazione" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{data_doc}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="595" y="0" width="49" height="13" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
 						<font size="8" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Des.RIga]]></text>
+					<text><![CDATA[Ft.Forn.]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="315" y="5" width="183" height="12"/>
-					<textElement>
-						<font size="8" isBold="true"/>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" mode="Opaque" x="644" y="0" width="52" height="13" printWhenGroupChanges="Registrazione" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Conto]]></text>
-				</staticText>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{supplier_invoice}]]></textFieldExpression>
+				</textField>
 				<staticText>
-					<reportElement x="545" y="5" width="118" height="12"/>
-					<textElement>
+					<reportElement mode="Opaque" x="357" y="0" width="37" height="13" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Rif. Mov.]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" mode="Opaque" x="375" y="0" width="98" height="13" printWhenGroupChanges="Registrazione" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ref}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="473" y="0" width="49" height="13" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Prot.Fat.]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" mode="Opaque" x="514" y="0" width="81" height="13" printWhenGroupChanges="Registrazione" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nr_invoice}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="696" y="0" width="40" height="13" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Partner]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="718" y="5" width="40" height="12"/>
-					<textElement textAlignment="Right">
-						<font size="8" isBold="true"/>
+				<textField isBlankWhenNull="true">
+					<reportElement isPrintRepeatedValues="false" mode="Opaque" x="736" y="0" width="66" height="13" isRemoveLineWhenBlank="true" printWhenGroupChanges="Registrazione" forecolor="#FFFFFF" backcolor="#999999"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="SansSerif" size="8" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Dare]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="762" y="5" width="40" height="12"/>
-					<textElement textAlignment="Right">
-						<font size="8" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Avere]]></text>
-				</staticText>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{des_partner}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
@@ -174,7 +239,7 @@ LEFT OUTER JOIN res_company on res_company.id = res_users.company_id]]>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="80" splitType="Stretch">
+		<band height="62" splitType="Stretch">
 			<staticText>
 				<reportElement x="6" y="0" width="309" height="32"/>
 				<textElement>
@@ -190,7 +255,7 @@ LEFT OUTER JOIN res_company on res_company.id = res_users.company_id]]>
 				<text><![CDATA[Da Data]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="6" y="47" width="48" height="10"/>
+				<reportElement x="139" y="37" width="48" height="10"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -204,47 +269,68 @@ LEFT OUTER JOIN res_company on res_company.id = res_users.company_id]]>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{from_date}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="60" y="47" width="66" height="10"/>
+				<reportElement x="193" y="37" width="66" height="10"/>
 				<textElement>
 					<font size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{to_date}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="152" y="37" width="48" height="10"/>
+				<reportElement x="305" y="37" width="48" height="10"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Sezionali]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="204" y="37" width="594" height="10"/>
+				<reportElement x="357" y="37" width="445" height="10"/>
 				<textElement>
 					<font size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{sel_journal}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="60" width="802" height="1"/>
+				<reportElement x="0" y="47" width="802" height="1"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement x="0" y="49" width="117" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Des.RIga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="49" width="183" height="12"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="566" y="47" width="40" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dare]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="662" y="47" width="40" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Avere]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="28" splitType="Stretch">
+		<band height="10" splitType="Stretch">
 			<frame>
-				<reportElement style="Righe" x="0" y="0" width="802" height="28"/>
-				<textField isBlankWhenNull="true">
-					<reportElement isPrintRepeatedValues="false" x="545" y="0" width="173" height="14" isRemoveLineWhenBlank="true"/>
-					<textElement>
-						<font fontName="SansSerif" size="8" isBold="false"/>
-					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{des_partner}]]></textFieldExpression>
-				</textField>
+				<reportElement style="Righe" x="0" y="0" width="802" height="10"/>
 				<textField pattern="###0.00;-###0.00" isBlankWhenNull="true">
-					<reportElement isPrintRepeatedValues="false" x="718" y="0" width="40" height="14" isRemoveLineWhenBlank="true">
+					<reportElement isPrintRepeatedValues="false" x="566" y="0" width="40" height="10" isRemoveLineWhenBlank="true" printWhenGroupChanges="Registrazione">
 						<printWhenExpression><![CDATA[$F{debit}!= 0]]></printWhenExpression>
 					</reportElement>
 					<textElement textAlignment="Right">
@@ -253,7 +339,7 @@ LEFT OUTER JOIN res_company on res_company.id = res_users.company_id]]>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{debit}]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0.00;###0.00-" isBlankWhenNull="true">
-					<reportElement isPrintRepeatedValues="false" x="762" y="0" width="40" height="14" isRemoveLineWhenBlank="true">
+					<reportElement isPrintRepeatedValues="false" x="662" y="0" width="40" height="10" isRemoveLineWhenBlank="true" printWhenGroupChanges="Registrazione">
 						<printWhenExpression><![CDATA[$F{credit}!= 0]]></printWhenExpression>
 					</reportElement>
 					<textElement textAlignment="Right">
@@ -261,47 +347,19 @@ LEFT OUTER JOIN res_company on res_company.id = res_users.company_id]]>
 					</textElement>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{credit}]]></textFieldExpression>
 				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement x="0" y="0" width="79" height="14"/>
-					<textElement>
-						<font fontName="SansSerif" size="8" isBold="false"/>
-					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{numreg}]]></textFieldExpression>
-				</textField>
-				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-					<reportElement x="79" y="0" width="50" height="14"/>
-					<textElement>
-						<font fontName="SansSerif" size="8" isBold="false"/>
-					</textElement>
-					<textFieldExpression class="java.util.Date"><![CDATA[$F{date}]]></textFieldExpression>
-				</textField>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-					<reportElement isPrintRepeatedValues="false" mode="Transparent" x="145" y="0" width="148" height="14" isRemoveLineWhenBlank="true" forecolor="#000000" backcolor="#FFFFFF"/>
+					<reportElement isPrintRepeatedValues="false" mode="Transparent" x="0" y="0" width="277" height="10" isRemoveLineWhenBlank="true" printWhenGroupChanges="Registrazione" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
 						<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					</textElement>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{desriga}]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement isPrintRepeatedValues="false" x="315" y="0" width="83" height="14" isRemoveLineWhenBlank="true"/>
+					<reportElement isPrintRepeatedValues="false" x="329" y="0" width="183" height="10" isRemoveLineWhenBlank="true" printWhenGroupChanges="Registrazione"/>
 					<textElement>
 						<font fontName="SansSerif" size="8" isBold="false"/>
 					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{account_code}]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement isPrintRepeatedValues="false" x="398" y="0" width="141" height="14" isRemoveLineWhenBlank="true"/>
-					<textElement>
-						<font fontName="SansSerif" size="8" isBold="false"/>
-					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{account_name}]]></textFieldExpression>
-				</textField>
-				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-					<reportElement x="79" y="14" width="50" height="14"/>
-					<textElement>
-						<font fontName="SansSerif" size="8" isBold="false"/>
-					</textElement>
-					<textFieldExpression class="java.util.Date"><![CDATA[$F{data_doc}]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{account_code} + " " + $F{account_name}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
