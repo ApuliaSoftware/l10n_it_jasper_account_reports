@@ -69,6 +69,9 @@ class Tempstampprinot(orm.Model):
         'importo_incpag': fields.float(
             'Importo Inc.Pag',
             digits_compute=dp.get_precision('Account')),
+        'supplier_invoice': fields.char('Supplier Invoice', size=128),
+        'nr_invoice': fields.char('Supplier Invoice', size=128),
+        'journal_name': fields.char('Supplier Invoice', size=128),
     }
 
 
@@ -120,6 +123,7 @@ class StampaPrimanota(orm.TransientModel):
                 'narration': move.narration,
                 'numero_doc': move.ref,
                 'sel_journal': sel_journal,
+                'journal_name': move.journal_id.name,
                 }
             for move_line in move.line_id:
                 riga = {
@@ -136,6 +140,12 @@ class StampaPrimanota(orm.TransientModel):
                     'desriga': move_line.name,
                     'data_doc': move_line.invoice_date or False,
                 }
+                if move_line.invoice:
+                    riga.update({
+                        'supplier_invoice':
+                            move_line.invoice.supplier_invoice_number or '',
+                        'nr_invoice': move_line.invoice.number or '',
+                    })
                 # codice in fondo al file
                 scad = {}
                 riga.update(testa)
