@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mastri" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="157"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Righe" mode="Opaque">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#FAF5AF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     tempstatistiche_mastricnt."desc_mov" AS tempstatistiche_mastricnt_desc_mov,
+     tempstatistiche_mastricnt."avere" AS tempstatistiche_mastricnt_avere,
+     tempstatistiche_mastricnt."p_conto_id" AS tempstatistiche_mastricnt_p_conto_id,
+     tempstatistiche_mastricnt."saldo_fin" AS tempstatistiche_mastricnt_saldo_fin,
+     tempstatistiche_mastricnt."p_export_csv" AS tempstatistiche_mastricnt_p_export_csv,
+     tempstatistiche_mastricnt."saldo_ini" AS tempstatistiche_mastricnt_saldo_ini,
+     tempstatistiche_mastricnt."saldo" AS tempstatistiche_mastricnt_saldo,
+     tempstatistiche_mastricnt."p_conto_name" AS tempstatistiche_mastricnt_p_conto_name,
+     tempstatistiche_mastricnt."partner" AS tempstatistiche_mastricnt_partner,
+     tempstatistiche_mastricnt."data_mov" AS tempstatistiche_mastricnt_data_mov,
+     tempstatistiche_mastricnt."dare" AS tempstatistiche_mastricnt_dare,
+     tempstatistiche_mastricnt."p_adata" AS tempstatistiche_mastricnt_p_adata,
+     tempstatistiche_mastricnt."p_dadata" AS tempstatistiche_mastricnt_p_dadata,
+     tempstatistiche_mastricnt."create_date" AS tempstatistiche_mastricnt_create_date,
+     tempstatistiche_mastricnt."ord_id" AS tempstatistiche_mastricnt_ord_id,
+     tempstatistiche_mastricnt."move_name" AS tempstatistiche_mastricnt_move_name,
+     tempstatistiche_mastricnt."account_id" AS tempstatistiche_mastricnt_account_id,
+     res_partner."name" AS res_partner_name,
+     account_account.name as account_name
+FROM
+     "public"."tempstatistiche_mastricnt" tempstatistiche_mastricnt LEFT OUTER JOIN "public"."res_users" res_users ON tempstatistiche_mastricnt."create_uid" = res_users."id"
+     LEFT OUTER JOIN "public"."res_partner" res_partner ON res_users."partner_id" = res_partner."id"
+     LEFT OUTER JOIN "public"."account_account" account_account on tempstatistiche_mastricnt."account_id" = account_account.id
+ORDER BY
+     tempstatistiche_mastricnt."account_id" ASC,
+     tempstatistiche_mastricnt."data_mov" ASC,
+     tempstatistiche_mastricnt."move_name" ASC,
+     tempstatistiche_mastricnt."ord_id" ASC]]>
+	</queryString>
+	<field name="tempstatistiche_mastricnt_desc_mov" class="java.lang.String"/>
+	<field name="tempstatistiche_mastricnt_avere" class="java.math.BigDecimal"/>
+	<field name="tempstatistiche_mastricnt_p_conto_id" class="java.lang.Integer"/>
+	<field name="tempstatistiche_mastricnt_saldo_fin" class="java.math.BigDecimal"/>
+	<field name="tempstatistiche_mastricnt_p_export_csv" class="java.lang.String"/>
+	<field name="tempstatistiche_mastricnt_saldo_ini" class="java.math.BigDecimal"/>
+	<field name="tempstatistiche_mastricnt_saldo" class="java.math.BigDecimal"/>
+	<field name="tempstatistiche_mastricnt_p_conto_name" class="java.lang.String"/>
+	<field name="tempstatistiche_mastricnt_partner" class="java.lang.String"/>
+	<field name="tempstatistiche_mastricnt_data_mov" class="java.sql.Date"/>
+	<field name="tempstatistiche_mastricnt_dare" class="java.math.BigDecimal"/>
+	<field name="tempstatistiche_mastricnt_p_adata" class="java.sql.Date"/>
+	<field name="tempstatistiche_mastricnt_p_dadata" class="java.sql.Date"/>
+	<field name="tempstatistiche_mastricnt_create_date" class="java.sql.Timestamp"/>
+	<field name="tempstatistiche_mastricnt_ord_id" class="java.lang.Double"/>
+	<field name="tempstatistiche_mastricnt_move_name" class="java.lang.String"/>
+	<field name="tempstatistiche_mastricnt_account_id" class="java.lang.Integer"/>
+	<field name="res_partner_name" class="java.lang.String"/>
+	<field name="account_name" class="java.lang.String">
+		<fieldDescription><![CDATA[Des. Conto]]></fieldDescription>
+	</field>
+	<variable name="tot_dare" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{tempstatistiche_mastricnt_dare}]]></variableExpression>
+	</variable>
+	<variable name="tot_avere" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{tempstatistiche_mastricnt_avere}]]></variableExpression>
+	</variable>
+	<variable name="group_tot_dare" class="java.math.BigDecimal" resetType="Group" resetGroup="Conto" calculation="Sum">
+		<variableExpression><![CDATA[$F{tempstatistiche_mastricnt_dare}]]></variableExpression>
+	</variable>
+	<variable name="group_tot_avere" class="java.math.BigDecimal" resetType="Group" resetGroup="Conto" calculation="Sum">
+		<variableExpression><![CDATA[$F{tempstatistiche_mastricnt_avere}]]></variableExpression>
+	</variable>
+	<group name="Conto">
+		<groupExpression><![CDATA[$F{tempstatistiche_mastricnt_account_id}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<staticText>
+					<reportElement x="77" y="33" width="59" height="15"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Data]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="136" y="33" width="338" height="15"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Descrizione]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="573" y="35" width="70" height="15"/>
+					<textElement textAlignment="Right">
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Dare]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="643" y="35" width="70" height="15"/>
+					<textElement textAlignment="Right">
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Avere]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="732" y="35" width="70" height="15"/>
+					<textElement textAlignment="Right">
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Saldo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="441" y="35" width="132" height="15"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Partner]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="33" width="61" height="15"/>
+					<textElement>
+						<font size="9" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Nr. Reg.]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="49" width="802" height="1"/>
+				</line>
+				<staticText>
+					<reportElement x="502" y="13" width="128" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Saldo iniziale al]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="630" y="13" width="70" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.util.Date"><![CDATA[$F{tempstatistiche_mastricnt_p_dadata}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="700" y="13" width="102" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tempstatistiche_mastricnt_saldo_ini}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="57" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Conto]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="57" y="0" width="498" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{account_name}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="36">
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement x="611" y="11" width="89" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{group_tot_avere}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement x="505" y="11" width="89" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{group_tot_dare}]]></textFieldExpression>
+				</textField>
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="713" y="11" width="89" height="20"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{group_tot_dare}-$V{group_tot_avere}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="24" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="128" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Stampa Mastrini]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="772" y="0" width="30" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="742" y="0" width="30" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pg.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="57" y="20" width="498" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tempstatistiche_mastricnt_p_conto_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="128" y="0" width="62" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Da Data]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="190" y="0" width="70" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{tempstatistiche_mastricnt_p_dadata}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="260" y="0" width="62" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A Data]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="322" y="0" width="70" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{tempstatistiche_mastricnt_p_adata}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="57" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conto]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<frame>
+				<reportElement style="Righe" mode="Opaque" x="0" y="0" width="802" height="15"/>
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+					<reportElement x="713" y="0" width="89" height="15" forecolor="#FF0000">
+						<printWhenExpression><![CDATA[$F{tempstatistiche_mastricnt_saldo} < 0]]></printWhenExpression>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tempstatistiche_mastricnt_saldo}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="573" y="0" width="70" height="15">
+					<printWhenExpression><![CDATA[$F{tempstatistiche_mastricnt_dare} >= 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tempstatistiche_mastricnt_dare}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="643" y="0" width="70" height="15">
+					<printWhenExpression><![CDATA[$F{tempstatistiche_mastricnt_avere} >= 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tempstatistiche_mastricnt_avere}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="713" y="0" width="89" height="15">
+					<printWhenExpression><![CDATA[$F{tempstatistiche_mastricnt_saldo} >=0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tempstatistiche_mastricnt_saldo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="77" y="0" width="59" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{tempstatistiche_mastricnt_data_mov}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="136" y="0" width="305" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tempstatistiche_mastricnt_desc_mov}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="573" y="0" width="70" height="15" forecolor="#FF0000">
+					<printWhenExpression><![CDATA[$F{tempstatistiche_mastricnt_dare} < 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tempstatistiche_mastricnt_dare}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="643" y="0" width="70" height="15" forecolor="#FF0000">
+					<printWhenExpression><![CDATA[$F{tempstatistiche_mastricnt_avere} < 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tempstatistiche_mastricnt_avere}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="441" y="0" width="132" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tempstatistiche_mastricnt_partner}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="77" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tempstatistiche_mastricnt_move_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="8">
+			<staticText>
+				<reportElement x="0" y="0" width="57" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Stampato da]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="0" width="16" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[il]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="57" y="0" width="56" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="128" y="0" width="56" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{tempstatistiche_mastricnt_create_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="26">
+			<line>
+				<reportElement x="0" y="1" width="802" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="4" width="802" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="18" width="57" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Stampato da]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="113" y="18" width="16" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<text><![CDATA[il]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="57" y="18" width="56" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_name}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="128" y="18" width="56" height="8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{tempstatistiche_mastricnt_create_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

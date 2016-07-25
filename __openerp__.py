@@ -36,7 +36,8 @@
         'security/ir.model.access.csv',
         'partner_ledger_view.xml',
         'primanota/primanota_view.xml',
-        'report.xml',   
+        'account_ledger_view.xml',
+        'report.xml',
         ],
     "active": False,
     "installable": True

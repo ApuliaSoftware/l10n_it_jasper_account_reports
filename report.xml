@@ -38,5 +38,17 @@
             <field name="jasper_output">pdf</field>
         </record>
 
+        <!-- REPORT Mastri Conti -->
+        <record id="report_mastri_conto" model="ir.actions.report.xml">
+                <field name="name">Mastri Conto</field>
+                <field name="type">ir.actions.report.xml</field>
+                <field name="model">account.move</field>
+                <field name="report_name">mastri</field>
+                <field name="report_rml">l10n_it_jasper_account_reports/report/mastrini_conti.jrxml</field>
+                <field name="report_type">pdf</field>
+                <field name="jasper_report">True</field>
+                <field name="jasper_output">pdf</field>
+        </record>
+
 </data>
 </openerp>
