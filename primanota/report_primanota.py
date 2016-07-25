@@ -22,6 +22,7 @@
 from openerp.osv import orm, fields
 import base64
 import openerp.addons.decimal_precision as dp
+import unicodedata
 
 
 class Tempstampprinot(orm.Model):
@@ -204,20 +205,12 @@ class crea_csv_pnt(orm.TransientModel):
             Record += '"' + "Note" + '";'
             Record += '"' + "Numero Doc" + '";'
             Record += '"' + "Data Doc." + '";'
-            Record += '"' + "Protocollo" + '";'
             Record += '"' + "Conto" + '";'
             Record += '"' + "Des. Conto " + '";'
             Record += '"' + "Dare" + '";'
             Record += '"' + "Avere" + '";'
             Record += '"' + "Partner" + '";'
-            Record += '"' + "Iva" + '";'
-            Record += '"' + "Imponibile" + '";'
             Record += '"' + "Des.Riga" + '";'
-            Record += '"' + "Num.Partita" + '";'
-            Record += '"' + "Doc.Partita" + '";'
-            Record += '"' + "Data Doc. Partita" + '";'
-            Record += '"' + "Data Scadenza Partita" + '";'
-            Record += '"' + "Importo Partita" + '";'
             Record += '"' + "Da Data" + '";'
             Record += '"' + "A Data" + '";'
             Record += '\r\n'
@@ -250,7 +243,6 @@ class crea_csv_pnt(orm.TransientModel):
                 else:
                     Record += '"' + ' ";'
 
-                Record += str(riga.protocollo).replace(".", ",") + ';'
                 Record += '"' + riga.account_code + '";'
                 Record += '"' + riga.account_name + '";'
                 Record += str(riga.debit).replace(".", ",") + ';'
@@ -261,8 +253,6 @@ class crea_csv_pnt(orm.TransientModel):
                         'ascii', 'ignore') + '";'
                 else:
                     Record += '"' + ' ";'
-                Record += str(riga.tax_amount).replace(".", ",") + ';'
-                Record += str(riga.imponibile).replace(".", ",") + ';'
                 if riga.desriga:
 
                     Record += '"' + unicodedata.normalize('NFKD',
@@ -270,24 +260,6 @@ class crea_csv_pnt(orm.TransientModel):
                         'ascii', 'ignore') + '";'
                 else:
                     Record += '"' + ' ";'
-                if riga.numpartita:
-                    Record += '"' + riga.numpartita + '";'
-                else:
-                    Record += '"' + ' ";'
-                if riga.numero_doc_partita:
-
-                    Record += '"' + riga.numero_doc_partita + '";'
-                else:
-                    Record += '"' + ' ";'
-                if riga.data_doc_partita:
-                    Record += '"' + riga.data_doc_partita + '";'
-                else:
-                    Record += '"' + ' ";'
-                if riga.data_scadenza:
-                    Record += '"' + riga.data_scadenza + '";'
-                else:
-                    Record += '"' + ' ";'
-                Record += str(riga.importo_incpag).replace(".", ",") + ';'
                 Record += '"' + riga.from_date + '";'
                 Record += '"' + riga.to_date + '";'
                 Record += "\r\n"
