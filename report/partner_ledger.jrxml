@@ -156,7 +156,7 @@ ORDER BY
 					<textElement>
 						<font isBold="true" isItalic="true"/>
 					</textElement>
-					<text><![CDATA[Descrizione]]></text>
+					<text><![CDATA[Voce]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="552" y="47" width="81" height="15"/>
@@ -187,7 +187,7 @@ ORDER BY
 					<textElement>
 						<font isBold="true" isItalic="true"/>
 					</textElement>
-					<text><![CDATA[Voce]]></text>
+					<text><![CDATA[Descrizione]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="141" y="45" width="67" height="15"/>
@@ -333,6 +333,11 @@ ORDER BY
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_dare}]]></textFieldExpression>
 				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="333" y="0" width="208" height="15"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{temp_partnerledger_ref}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 				<reportElement x="633" y="0" width="70" height="15">
@@ -354,7 +359,7 @@ ORDER BY
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{temp_partnerledger_date_mov}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="333" y="0" width="219" height="15"/>
+				<reportElement x="69" y="1" width="67" height="15"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{temp_partnerledger_desc_mov}]]></textFieldExpression>
 			</textField>
@@ -383,11 +388,6 @@ ORDER BY
 				<reportElement x="210" y="0" width="118" height="15"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_name}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="69" y="0" width="67" height="15"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{temp_partnerledger_ref}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="141" y="0" width="67" height="15"/>
