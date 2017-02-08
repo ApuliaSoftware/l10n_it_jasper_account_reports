@@ -95,7 +95,7 @@ class temp_partnerledger(orm.Model):
                 cr, uid, partner.id, context).credit
             credito_in = partner_obj.browse(
                 cr, uid, partner.id, context).debit
-            saldo_in = self.calcola_saldo_ini(cr,uid, partner_id, parameter,context)
+            saldo_in = self.calcola_saldo_ini(cr,uid, partner.id, context)
             if parameters.customer:
                 conto = partner.property_account_receivable.id
             else:
@@ -188,7 +188,7 @@ class temp_partnerledger(orm.Model):
                 _('Nothing to print, check the parameters'))
         return True
 
-    def calcola_saldo_ini(self,cr,uid, partner_id, parameter,context):
+    def calcola_saldo_ini(self,cr,uid, partner_id, context):
         import pdb;
         pdb.set_trace()
         ctx = context.copy()
