@@ -74,7 +74,7 @@ class temp_partnerledger(orm.Model):
         context['state'] = 'posted'
         context['initial_bal'] = True
 
-        context['date_to'] = parameters.p_fromdate
+        context['date_to'] = parameters.from_date
         context['date_from'] = '2001-01-01'
 
         p_partner_name = 'Tutti'
