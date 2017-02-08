@@ -25,7 +25,8 @@ import time
 import openerp.addons.decimal_precision as dp
 import unicodedata
 import base64
-
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 class temp_partnerledger(orm.Model):
 
@@ -69,15 +70,14 @@ class temp_partnerledger(orm.Model):
 
         partner_obj = self.pool['res.partner']
         moveline_obj = self.pool['account.move.line']
-
         # ---- COSTRUISCO LA CONTEXT PER CALCOLARE I SALDI DI APERTURA
-
         context['state'] = 'posted'
         context['initial_bal'] = False
-
-        context['date_to'] = parameters.from_date
+        dt = datetime.strptime(parameters.from_date, '%Y-%m-%d')
+        dt + relativedelta(days=-1)
+        dt_from = dt.strftime('%Y-%m-%d')
+        context['date_to'] = dt_from
         context['date_from'] = '2001-01-01'
-
         p_partner_name = 'Tutti'
         if parameters.partner_id:
             partner_ids = [parameters.partner_id.id]
@@ -169,7 +169,7 @@ class temp_partnerledger(orm.Model):
                         self.create(cr, uid, riga_wr)
                         if not create:
                             create = True
-                saldo = debito_in - credito_in
+                saldo = saldo_in
                 riga_up = {}
                 ord = 0
                 temp_ids = self.search(
@@ -189,8 +189,8 @@ class temp_partnerledger(orm.Model):
         return True
 
     def calcola_saldo_ini(self,cr,uid, partner_id, context):
-        import pdb;
-        pdb.set_trace()
+        # import pdb;
+        # pdb.set_trace()
         ctx = context.copy()
         ctx['all_fiscalyear'] = True
         atup = '(' + str(partner_id) + ')'
@@ -204,6 +204,7 @@ class temp_partnerledger(orm.Model):
                               GROUP BY l.partner_id, a.type
                               """
         cr.execute(qqry)
+        val = 0
         for pid,type,val in cr.fetchall():
             if val is None: val=0
         return val
