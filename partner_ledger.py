@@ -73,7 +73,7 @@ class temp_partnerledger(orm.Model):
         # ---- COSTRUISCO LA CONTEXT PER CALCOLARE I SALDI DI APERTURA
 
         context['state'] = 'posted'
-        context['initial_bal'] = True
+        context['initial_bal'] = False
 
         context['date_to'] = parameters.from_date
         context['date_from'] = '2001-01-01'
