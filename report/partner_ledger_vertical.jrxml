@@ -29,6 +29,7 @@
      temp_partnerledger."ord_id" AS temp_partnerledger_ord_id,
      temp_partnerledger."dare" AS temp_partnerledger_dare,
      temp_partnerledger."date_mov" AS temp_partnerledger_date_mov,
+     temp_partnerledger."date_maturity" AS temp_partnerledger_date_maturity,
      temp_partnerledger."ref" AS temp_partnerledger_ref,
      temp_partnerledger."journal_id" AS temp_partnerledger_journal_id,
      res_partner."name" AS res_partner_name,
@@ -55,8 +56,7 @@ FROM
      LEFT OUTER JOIN "public"."res_province" res_province ON res_partner_A."province" = res_province."id"
 ORDER BY
      temp_partnerledger."partner_id" ASC,
-     temp_partnerledger."ord_id" ASC
-     ]]>
+     temp_partnerledger."ord_id" ASC]]>
 	</queryString>
 	<field name="temp_partnerledger_id" class="java.lang.Integer"/>
 	<field name="temp_partnerledger_create_uid" class="java.lang.Integer"/>
@@ -76,6 +76,7 @@ ORDER BY
 	<field name="temp_partnerledger_ord_id" class="java.lang.Double"/>
 	<field name="temp_partnerledger_dare" class="java.math.BigDecimal"/>
 	<field name="temp_partnerledger_date_mov" class="java.sql.Date"/>
+	<field name="temp_partnerledger_date_maturity" class="java.sql.Date"/>
 	<field name="temp_partnerledger_ref" class="java.lang.String"/>
 	<field name="temp_partnerledger_journal_id" class="java.lang.Integer"/>
 	<field name="res_partner_name" class="java.lang.String"/>
@@ -112,18 +113,14 @@ ORDER BY
 					<text><![CDATA[Partner]]></text>
 				</staticText>
 				<textField pattern="¤ #,##0.00">
-					<reportElement x="473" y="20" width="80" height="20">
-						<printWhenExpression><![CDATA[$F{temp_partnerledger_credito_ini} >= 0]]></printWhenExpression>
-					</reportElement>
+					<reportElement x="473" y="20" width="80" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{temp_partnerledger_credito_ini}]]></textFieldExpression>
 				</textField>
 				<textField pattern="¤ #,##0.00">
-					<reportElement x="384" y="20" width="89" height="20" forecolor="#FF3333">
-						<printWhenExpression><![CDATA[$F{temp_partnerledger_debito_ini}>0]]></printWhenExpression>
-					</reportElement>
+					<reportElement x="384" y="20" width="89" height="20" forecolor="#FF3333"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="10" isBold="true"/>
 					</textElement>

@@ -74,8 +74,8 @@ class temp_partnerledger(orm.Model):
         context['state'] = 'posted'
         context['initial_bal'] = True
 
-        context['date_to'] = parameters.to_date
-        context['date_from'] = parameters.from_date
+        context['date_to'] = parameters.p_fromdate
+        context['date_from'] = '2001-01-01'
 
         p_partner_name = 'Tutti'
         if parameters.partner_id:
@@ -130,6 +130,7 @@ class temp_partnerledger(orm.Model):
                                 'journal_id': riga.journal_id.id,
                                 'ref': riga.invoice.number,
                                 'invoice_id': riga.invoice.id,
+                                'date_maturity': riga.date_maturity,
                                 }
                             self.create(cr, uid, riga_wr)
                             if not create:
@@ -145,7 +146,7 @@ class temp_partnerledger(orm.Model):
                         riga_wr = {
                             'date_mov': riga.date,
                             'desc_mov': riga.name,
-                            'date_marturity': riga.date_maturity,
+                            'date_maturity': riga.date_maturity,
                             'dare': riga.debit,
                             'avere': riga.credit,
                             'partner_id': partner.id,
