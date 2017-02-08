@@ -41,6 +41,7 @@ class temp_partnerledger(orm.Model):
         'journal_id': fields.many2one('account.journal', 'Journal'),
         'partner_id': fields.many2one('res.partner', 'Partner'),
         'ref': fields.char('Ref', size=256),
+        'date_maturity': fields.date('Data Scadenza'),
         'dare': fields.float(
             'dare', digits_compute=dp.get_precision('Account')),
         'avere': fields.float(
@@ -55,7 +56,7 @@ class temp_partnerledger(orm.Model):
         'invoice_id': fields.many2one('account.invoice', 'Invoice'),
         }
 
-    _order = 'date_mov'
+    _order = 'date_mov,ref,date_maturity'
 
     def _clear(self, cr, uid, context):
         ids = self.search(cr, uid, [])
@@ -108,7 +109,7 @@ class temp_partnerledger(orm.Model):
 
             if move_ids:
                 for riga in moveline_obj.browse(cr, uid, move_ids):
-                    if riga.invoice:
+                    if False and riga.invoice: # messo in rem per vedere il dettaglio scadenze delle fatture
                         old_id = self.search(
                             cr, uid,
                             [('partner_id', '=', partner.id),
@@ -144,6 +145,7 @@ class temp_partnerledger(orm.Model):
                         riga_wr = {
                             'date_mov': riga.date,
                             'desc_mov': riga.name,
+                            'date_marturity': riga.date_maturity,
                             'dare': riga.debit,
                             'avere': riga.credit,
                             'partner_id': partner.id,
@@ -156,6 +158,9 @@ class temp_partnerledger(orm.Model):
                             'journal_id': riga.journal_id.id,
                             'ref': riga.ref,
                             }
+                        if riga.invoice:
+                            riga_wr['invoice_id'] = riga.invoice.id
+                            riga_wr['ref'] += " " + riga.invoice.number
                         self.create(cr, uid, riga_wr)
                         if not create:
                             create = True
@@ -164,7 +169,7 @@ class temp_partnerledger(orm.Model):
                 ord = 0
                 temp_ids = self.search(
                     cr, uid, [('partner_id', '=', partner.id)],
-                    order='date_mov, ref')
+                    order='date_mov, ref, date_maturity')
                 if temp_ids:
                     for riga in self.browse(cr, uid, temp_ids):
                         saldo += riga.dare - riga.avere
