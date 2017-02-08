@@ -54,6 +54,7 @@ class temp_partnerledger(orm.Model):
             'Debito Iniziale', digits_compute=dp.get_precision('Account')),
         'ord_id': fields.float('Ordine'),
         'invoice_id': fields.many2one('account.invoice', 'Invoice'),
+        'saldo_in': fields.float('Saldo Iniziale Stampa'),
         }
 
     _order = 'date_mov,ref,date_maturity'
@@ -94,6 +95,7 @@ class temp_partnerledger(orm.Model):
                 cr, uid, partner.id, context).credit
             credito_in = partner_obj.browse(
                 cr, uid, partner.id, context).debit
+            saldo_in = self.calcola_saldo_ini(cr,uid, partner_id, parameter,context)
             if parameters.customer:
                 conto = partner.property_account_receivable.id
             else:
@@ -131,6 +133,7 @@ class temp_partnerledger(orm.Model):
                                 'ref': riga.invoice.number,
                                 'invoice_id': riga.invoice.id,
                                 'date_maturity': riga.date_maturity,
+                                'saldo_in':saldo_in,
                                 }
                             self.create(cr, uid, riga_wr)
                             if not create:
@@ -158,6 +161,7 @@ class temp_partnerledger(orm.Model):
                             'p_partner_name': p_partner_name,
                             'journal_id': riga.journal_id.id,
                             'ref': riga.ref,
+                            'saldo_in': saldo_in,
                             }
                         if riga.invoice:
                             riga_wr['invoice_id'] = riga.invoice.id
@@ -183,6 +187,26 @@ class temp_partnerledger(orm.Model):
                 _('Error'),
                 _('Nothing to print, check the parameters'))
         return True
+
+    def calcola_saldo_ini(self,cr,uid, partner_id, parameter,context):
+        import pdb;
+        pdb.set_trace()
+        ctx = context.copy()
+        ctx['all_fiscalyear'] = True
+        atup = '(' + str(partner_id) + ')'
+        query = self.pool.get('account.move.line')._query_get(cr, uid, context=ctx)
+        qqry = """SELECT l.partner_id, a.type, SUM(l.debit-l.credit)
+                              FROM account_move_line l
+                              LEFT JOIN account_account a ON (l.account_id=a.id)
+                              WHERE a.type IN ('receivable','payable')
+                              AND l.partner_id IN %s
+                              AND """ % str(atup) + query + """
+                              GROUP BY l.partner_id, a.type
+                              """
+        cr.execute(qqry)
+        for pid,type,val in cr.fetchall():
+            if val is None: val=0
+        return val
 
 
 class wizard_partner_ledger(orm.TransientModel):
