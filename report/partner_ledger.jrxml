@@ -348,9 +348,9 @@ ORDER BY
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="15" splitType="Stretch">
+		<band height="16" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="802" height="15" isPrintWhenDetailOverflows="true"/>
+				<reportElement style="Righe" mode="Opaque" x="0" y="0" width="802" height="15" isPrintWhenDetailOverflows="true"/>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 					<reportElement x="552" y="0" width="81" height="15">
 						<printWhenExpression><![CDATA[$F{temp_partnerledger_dare} >= 0]]></printWhenExpression>
