@@ -30,6 +30,7 @@
      temp_partnerledger."ord_id" AS temp_partnerledger_ord_id,
      temp_partnerledger."dare" AS temp_partnerledger_dare,
      temp_partnerledger."date_mov" AS temp_partnerledger_date_mov,
+     temp_partnerledger."date_maturity" AS temp_partnerledger_date_maturity,
      temp_partnerledger."ref" AS temp_partnerledger_ref,
      temp_partnerledger."journal_id" AS temp_partnerledger_journal_id,
      temp_partnerledger."invoice_id" AS temp_partnerledger_invoice_id,
@@ -49,7 +50,7 @@
      res_province."name" AS res_province_name,
      account_journal."name" AS account_journal_name,
      res_company."name" AS res_company_name,
-account_invoice.supplier_invoice_number, account_invoice.date_invoice, account_invoice.name
+account_invoice.supplier_invoice_number, account_invoice.date_invoice, account_invoice.name, account_invoice.number
 FROM
      "public"."res_company" res_company RIGHT OUTER JOIN "public"."temp_partnerledger" temp_partnerledger ON res_company."id" = temp_partnerledger."p_company_id"
      LEFT OUTER JOIN "public"."res_partner" res_partner ON temp_partnerledger."partner_id" = res_partner."id"
@@ -81,6 +82,7 @@ ORDER BY
 	<field name="temp_partnerledger_ord_id" class="java.lang.Double"/>
 	<field name="temp_partnerledger_dare" class="java.math.BigDecimal"/>
 	<field name="temp_partnerledger_date_mov" class="java.sql.Date"/>
+	<field name="temp_partnerledger_date_maturity" class="java.sql.Date"/>
 	<field name="temp_partnerledger_ref" class="java.lang.String"/>
 	<field name="temp_partnerledger_journal_id" class="java.lang.Integer"/>
 	<field name="temp_partnerledger_invoice_id" class="java.lang.Integer"/>
@@ -103,6 +105,7 @@ ORDER BY
 	<field name="supplier_invoice_number" class="java.lang.String"/>
 	<field name="date_invoice" class="java.sql.Date"/>
 	<field name="name" class="java.lang.String"/>
+	<field name="number" class="java.lang.String"/>
 	<variable name="tot_dare" class="java.math.BigDecimal" resetType="Group" resetGroup="partner" calculation="Sum">
 		<variableExpression><![CDATA[$F{temp_partnerledger_dare}]]></variableExpression>
 	</variable>
@@ -335,6 +338,13 @@ ORDER BY
 				</textElement>
 				<text><![CDATA[Data]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="222" y="54" width="66" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Dt Scadenza]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<detail>
@@ -384,7 +394,7 @@ ORDER BY
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{temp_partnerledger_date_mov}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="371" y="0" width="85" height="15"/>
+				<reportElement x="371" y="0" width="181" height="15"/>
 				<textElement verticalAlignment="Bottom">
 					<font size="8" isBold="false"/>
 				</textElement>
@@ -422,10 +432,10 @@ ORDER BY
 				<textElement verticalAlignment="Bottom">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{number}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="139" y="0" width="145" height="15" isPrintWhenDetailOverflows="true"/>
+				<reportElement x="139" y="0" width="83" height="15" isPrintWhenDetailOverflows="true"/>
 				<textElement verticalAlignment="Bottom">
 					<font size="8" isBold="false"/>
 				</textElement>
@@ -438,12 +448,12 @@ ORDER BY
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{supplier_invoice_number}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="456" y="0" width="96" height="15"/>
-				<textElement>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="222" y="0" width="50" height="15"/>
+				<textElement verticalAlignment="Bottom">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{temp_partnerledger_ref}]]></textFieldExpression>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{temp_partnerledger_date_maturity}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
