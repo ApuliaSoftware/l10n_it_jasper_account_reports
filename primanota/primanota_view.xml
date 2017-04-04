@@ -54,10 +54,10 @@
                         <button name="generacsvpnt"
                                 string="Export" type="object"/>
                     </group>
-                    <group colspan="4" states="get">
-                        <field name="data" readonly="1"/>
-                        <field name="filename"/>
-                    </group>
+                </group>
+                <group colspan="4" states="get">
+                    <field name="data" readonly="1" filename="filename"/>
+                    <field name="filename" invisible="1"/>
                 </group>
             </form>
         </field>

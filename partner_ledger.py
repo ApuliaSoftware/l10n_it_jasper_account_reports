@@ -20,7 +20,7 @@
 ##############################################################################
 
 from openerp.osv import fields, osv, orm
-from tools.translate import _
+from openerp import _
 import time
 import openerp.addons.decimal_precision as dp
 import unicodedata

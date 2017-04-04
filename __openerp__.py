@@ -27,12 +27,17 @@
     'author': 'Apulia Software S.r.l.',
     'website': 'info@apuliasoftware.it',
     'license': 'AGPL-3',
-    "depends": ['jasper_reports','account'],
-    "init_xml": [
+    "depends": [
+        'jasper_reports',
+        'account',
+        'account_due_list',
+    ],
+    "data": [
         'security/ir.model.access.csv',
         'partner_ledger_view.xml',
         'primanota/primanota_view.xml',
-        'report.xml',   
+        'account_ledger_view.xml',
+        'report.xml',
         ],
     "active": False,
     "installable": True

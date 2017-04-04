@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="wizard_account_ledger_report_form">
+        <field name="name">wizard.account.ledger.report.form</field>
+        <field name="model">stampa.mastri</field>
+        <field name="arch" type="xml">
+            <form string="Load Reporting Data">
+                <field name="company_id" invisible="True"/>
+                <field name="state" invisible="1" colspan="4"/>
+                <group states="set">
+                    <field name="dadata" />
+                    <field name="adata" />
+                    <field name="conto"
+                           domain="[('company_id', '=', company_id)]"/>
+                    <field name="export_csv" />
+                </group>
+                <group states="get">
+                    <field name="data" filename="filename" />
+                    <field name="filename"/>
+                </group>
+                <footer states="set">
+                    <button name="check_report" string="Load Data"
+                            type="object" class="oe_highlight"/>
+                    o
+                    <button string="Close" class="oe_link" special="cancel"/>
+                </footer>
+                <footer states="get">
+                    <button string="Close" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_report_account_ledger" model="ir.actions.act_window">
+      <field name="name">Stampa Mastri Conto</field>
+      <field name="res_model">stampa.mastri</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="wizard_account_ledger_report_form"/>
+      <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_report_account_ledger"
+              id="menu_jasper_stampa_account_ledger"
+              parent="account.menu_finance_generic_reporting"/>
+
+</data>
+</openerp>

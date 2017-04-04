@@ -45,8 +45,6 @@
      res_partner_A."phone" AS res_partner_A_phone,
      res_partner_A."mobile" AS res_partner_A_mobile,
      res_partner_A."fiscalcode" AS res_partner_A_fiscalcode,
-     res_province."code" AS res_province_code,
-     res_province."name" AS res_province_name,
      account_journal."name" AS account_journal_name,
      res_company."name" AS res_company_name
 FROM
@@ -54,7 +52,6 @@ FROM
      LEFT OUTER JOIN "public"."res_partner" res_partner ON temp_partnerledger."partner_id" = res_partner."id"
      LEFT OUTER JOIN "public"."account_journal" account_journal ON temp_partnerledger."journal_id" = account_journal."id"
      LEFT OUTER JOIN "public"."res_partner" res_partner_A ON res_company."partner_id" = res_partner_A."id"
-     LEFT OUTER JOIN "public"."res_province" res_province ON res_partner_A."province" = res_province."id"
 ORDER BY
      temp_partnerledger."partner_id" ASC,
      temp_partnerledger."ord_id" ASC]]>
@@ -93,8 +90,6 @@ ORDER BY
 	<field name="res_partner_a_phone" class="java.lang.String"/>
 	<field name="res_partner_a_mobile" class="java.lang.String"/>
 	<field name="res_partner_a_fiscalcode" class="java.lang.String"/>
-	<field name="res_province_code" class="java.lang.String"/>
-	<field name="res_province_name" class="java.lang.String"/>
 	<field name="account_journal_name" class="java.lang.String"/>
 	<field name="res_company_name" class="java.lang.String"/>
 	<variable name="tot_dare" class="java.math.BigDecimal" resetType="Group" resetGroup="partner" calculation="Sum">
@@ -256,8 +251,7 @@ ORDER BY
 					<font size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[($F{res_partner_a_zip} == null ? "": $F{res_partner_a_zip})+" "+
-($F{res_partner_a_city} == null ? "" :$F{res_partner_a_city})+" "+
-($F{res_province_code}== null ? "" :$F{res_province_code})]]></textFieldExpression>
+($F{res_partner_a_city} == null ? "" :$F{res_partner_a_city})]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

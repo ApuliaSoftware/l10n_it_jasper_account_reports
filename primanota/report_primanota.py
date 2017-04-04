@@ -22,6 +22,7 @@
 from openerp.osv import orm, fields
 import base64
 import openerp.addons.decimal_precision as dp
+import unicodedata
 
 
 class Tempstampprinot(orm.Model):
@@ -37,6 +38,7 @@ class Tempstampprinot(orm.Model):
     _columns = {
         'from_date': fields.date('Da Data Registrazione '),
         'to_date': fields.date('A Data Registrazione'),
+        'sel_journal': fields.text('Giornali Selezionati'),
         'numreg': fields.char('Numero Reg', size=64, required=True),
         'ref': fields.char('Descrizione Registrazione', size=64),
         'date': fields.date('Data Reg'),
@@ -67,6 +69,9 @@ class Tempstampprinot(orm.Model):
         'importo_incpag': fields.float(
             'Importo Inc.Pag',
             digits_compute=dp.get_precision('Account')),
+        'supplier_invoice': fields.char('Supplier Invoice', size=128),
+        'nr_invoice': fields.char('Supplier Invoice', size=128),
+        'journal_name': fields.char('Supplier Invoice', size=128),
     }
 
 
@@ -97,14 +102,16 @@ class StampaPrimanota(orm.TransientModel):
         param = self.browse(cr, uid, ids[0])
         cerca = [('date', '>=', param.from_date),
                  ('date', '<=', param.to_date)]
+        sel_journal = 'Tutti'
         if this.journal_ids:
             journals = []
             for selected_journal in this.journal_ids:
                 journals.append(selected_journal.id)
             cerca.append(('journal_id', 'in', journals))
+            sel_journal = ' / '.join([j.name for j in this.journal_ids])
         ids_move = moveobj.search(cr, uid, cerca)
         if not ids_move:
-            raise osv.except_osv(_('Attenzione !'), _(
+            raise orm.except_orm(('Attenzione !'), (
                 'Non ci sono Registrazioni per Questa Selezione'))
         for move in moveobj.browse(cr, uid, ids_move):
             testa = {
@@ -115,6 +122,8 @@ class StampaPrimanota(orm.TransientModel):
                 'date': move.date,
                 'narration': move.narration,
                 'numero_doc': move.ref,
+                'sel_journal': sel_journal,
+                'journal_name': move.journal_id.name,
                 }
             for move_line in move.line_id:
                 riga = {
@@ -124,13 +133,21 @@ class StampaPrimanota(orm.TransientModel):
                     'debit': move_line.debit,
                     'credit': move_line.credit,
                     'partner_id': move_line.partner_id.id,
-                    'des_partner': move_line.partner_id.name,
+                    'des_partner': '{name} {vat}'.format(
+                        name=move_line.partner_id.name or '',
+                        vat=move_line.partner_id.vat or ''),
                     'tax_code_id': move_line.tax_code_id.id,
                     'tax_amount': move_line.tax_amount,
                     'account_tax_id': move_line.account_tax_id.id,
                     'desriga': move_line.name,
                     'data_doc': move_line.invoice_date or False,
                 }
+                if move_line.invoice:
+                    riga.update({
+                        'supplier_invoice':
+                            move_line.invoice.supplier_invoice_number or '',
+                        'nr_invoice': move_line.invoice.number or '',
+                    })
                 # codice in fondo al file
                 scad = {}
                 riga.update(testa)
@@ -200,20 +217,12 @@ class crea_csv_pnt(orm.TransientModel):
             Record += '"' + "Note" + '";'
             Record += '"' + "Numero Doc" + '";'
             Record += '"' + "Data Doc." + '";'
-            Record += '"' + "Protocollo" + '";'
             Record += '"' + "Conto" + '";'
             Record += '"' + "Des. Conto " + '";'
             Record += '"' + "Dare" + '";'
             Record += '"' + "Avere" + '";'
             Record += '"' + "Partner" + '";'
-            Record += '"' + "Iva" + '";'
-            Record += '"' + "Imponibile" + '";'
             Record += '"' + "Des.Riga" + '";'
-            Record += '"' + "Num.Partita" + '";'
-            Record += '"' + "Doc.Partita" + '";'
-            Record += '"' + "Data Doc. Partita" + '";'
-            Record += '"' + "Data Scadenza Partita" + '";'
-            Record += '"' + "Importo Partita" + '";'
             Record += '"' + "Da Data" + '";'
             Record += '"' + "A Data" + '";'
             Record += '\r\n'
@@ -246,7 +255,6 @@ class crea_csv_pnt(orm.TransientModel):
                 else:
                     Record += '"' + ' ";'
 
-                Record += str(riga.protocollo).replace(".", ",") + ';'
                 Record += '"' + riga.account_code + '";'
                 Record += '"' + riga.account_name + '";'
                 Record += str(riga.debit).replace(".", ",") + ';'
@@ -257,8 +265,6 @@ class crea_csv_pnt(orm.TransientModel):
                         'ascii', 'ignore') + '";'
                 else:
                     Record += '"' + ' ";'
-                Record += str(riga.tax_amount).replace(".", ",") + ';'
-                Record += str(riga.imponibile).replace(".", ",") + ';'
                 if riga.desriga:
 
                     Record += '"' + unicodedata.normalize('NFKD',
@@ -266,24 +272,6 @@ class crea_csv_pnt(orm.TransientModel):
                         'ascii', 'ignore') + '";'
                 else:
                     Record += '"' + ' ";'
-                if riga.numpartita:
-                    Record += '"' + riga.numpartita + '";'
-                else:
-                    Record += '"' + ' ";'
-                if riga.numero_doc_partita:
-
-                    Record += '"' + riga.numero_doc_partita + '";'
-                else:
-                    Record += '"' + ' ";'
-                if riga.data_doc_partita:
-                    Record += '"' + riga.data_doc_partita + '";'
-                else:
-                    Record += '"' + ' ";'
-                if riga.data_scadenza:
-                    Record += '"' + riga.data_scadenza + '";'
-                else:
-                    Record += '"' + ' ";'
-                Record += str(riga.importo_incpag).replace(".", ",") + ';'
                 Record += '"' + riga.from_date + '";'
                 Record += '"' + riga.to_date + '";'
                 Record += "\r\n"
