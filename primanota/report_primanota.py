@@ -113,7 +113,7 @@ class StampaPrimanota(orm.TransientModel):
                 'numreg': move.name,
                 'ref': move.ref,
                 'date': move.date,
-                'narration': move.narration,
+                'narration': move.narration + move.journal_id.name ,
                 'numero_doc': move.ref,
                 }
             for move_line in move.line_id:
@@ -130,6 +130,7 @@ class StampaPrimanota(orm.TransientModel):
                     'account_tax_id': move_line.account_tax_id.id,
                     'desriga': move_line.name,
                     'data_doc': move_line.invoice_date or False,
+                    'data_scadenza': move_line.date_maturity or False,
                 }
                 # codice in fondo al file
                 scad = {}
