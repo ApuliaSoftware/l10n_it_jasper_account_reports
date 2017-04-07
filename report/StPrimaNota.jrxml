@@ -60,20 +60,11 @@
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{numreg}]]></textFieldExpression>
 				</textField>
 				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-					<reportElement x="209" y="12" width="75" height="14"/>
+					<reportElement x="208" y="12" width="81" height="14"/>
 					<textElement>
 						<font fontName="SansSerif" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.util.Date"><![CDATA[$F{date}]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement x="290" y="12" width="222" height="14">
-						<printWhenExpression><![CDATA[false]]></printWhenExpression>
-					</reportElement>
-					<textElement>
-						<font fontName="SansSerif" size="10" isBold="true"/>
-					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[$F{narration}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="15" y="12" width="88" height="14"/>
@@ -89,6 +80,13 @@
 					</textElement>
 					<text><![CDATA[Del]]></text>
 				</staticText>
+				<textField>
+					<reportElement x="305" y="12" width="498" height="14"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{narration}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
