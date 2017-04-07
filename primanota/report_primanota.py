@@ -40,7 +40,7 @@ class Tempstampprinot(orm.Model):
         'numreg': fields.char('Numero Reg', size=64, required=True),
         'ref': fields.char('Descrizione Registrazione', size=64),
         'date': fields.date('Data Reg'),
-        'narration': fields.text('Narration'),
+        'narration': fields.char('Narration',size=300),
         'numero_doc': fields.char('Numero Doc.', size=30),
         'data_doc': fields.date('Data Doc.'),
         'protocollo': fields.integer('Protocollo'),
