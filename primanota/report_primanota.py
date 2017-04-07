@@ -113,7 +113,7 @@ class StampaPrimanota(orm.TransientModel):
                 'numreg': move.name,
                 'ref': move.ref,
                 'date': move.date,
-                'narration': move.narration + move.journal_id.name ,
+                'narration': '%s%s' % (move.narration or "", move.journal_id.name or ""),
                 'numero_doc': move.ref,
                 }
             for move_line in move.line_id:
