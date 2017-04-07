@@ -107,6 +107,7 @@ class StampaPrimanota(orm.TransientModel):
             raise osv.except_osv(_('Attenzione !'), _(
                 'Non ci sono Registrazioni per Questa Selezione'))
         for move in moveobj.browse(cr, uid, ids_move):
+            print '%s%s' % (move.narration or "", move.journal_id.name or "")
             testa = {
                 'from_date': param.from_date,
                 'to_date': param.to_date,
