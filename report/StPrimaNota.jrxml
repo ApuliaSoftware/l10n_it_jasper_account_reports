@@ -200,7 +200,7 @@
 				</graphicElement>
 			</rectangle>
 			<textField isBlankWhenNull="true">
-				<reportElement isPrintRepeatedValues="false" x="540" y="0" width="103" height="14" isRemoveLineWhenBlank="true"/>
+				<reportElement x="540" y="0" width="156" height="14" isRemoveLineWhenBlank="true"/>
 				<textElement>
 					<font fontName="SansSerif" size="8" isBold="false"/>
 				</textElement>
