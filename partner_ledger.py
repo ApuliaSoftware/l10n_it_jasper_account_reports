@@ -163,6 +163,7 @@ class temp_partnerledger(orm.Model):
                             'journal_id': riga.journal_id.id,
                             'ref': riga.ref,
                             'saldo_in': saldo_in,
+                            'move_id': riga.move_id.id,
                             }
                         if riga.invoice:
                             riga_wr['invoice_id'] = riga.invoice.id
