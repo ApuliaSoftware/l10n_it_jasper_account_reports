@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="partner_ledger" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.zoom" value="1.610510000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Righe" mode="Opaque" fill="Solid">
@@ -48,6 +48,9 @@
      res_partner_A."fiscalcode" AS res_partner_A_fiscalcode,
      account_journal."name" AS account_journal_name,
      res_company."name" AS res_company_name,
+     account_move."name" AS numreg,
+     account_move."ref" AS desreg,
+     account_move."narration" AS narration,
 account_invoice.supplier_invoice_number, account_invoice.date_invoice, account_invoice.name, account_invoice.number
 FROM
      "public"."res_company" res_company RIGHT OUTER JOIN "public"."temp_partnerledger" temp_partnerledger ON res_company."id" = temp_partnerledger."p_company_id"
@@ -55,6 +58,7 @@ FROM
      LEFT OUTER JOIN "public"."account_journal" account_journal ON temp_partnerledger."journal_id" = account_journal."id"
      LEFT OUTER JOIN "public"."res_partner" res_partner_A ON res_company."partner_id" = res_partner_A."id"
 LEFT OUTER JOIN account_invoice on temp_partnerledger."invoice_id" = account_invoice.id
+	LEFT OUTER JOIN account_move on temp_partnerledger."move_id" = account_move.id
 
 ORDER BY
      temp_partnerledger."partner_id" ASC,
@@ -288,7 +292,7 @@ ORDER BY
 				<textElement verticalAlignment="Bottom">
 					<font size="8" isBold="true" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Protocollo]]></text>
+				<text><![CDATA[Num.Reg.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="139" y="59" width="67" height="15"/>
@@ -470,6 +474,11 @@ ORDER BY
 			<line>
 				<reportElement x="0" y="0" width="798" height="1"/>
 			</line>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="13" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>
