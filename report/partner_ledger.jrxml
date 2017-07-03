@@ -34,6 +34,7 @@
      temp_partnerledger."ref" AS temp_partnerledger_ref,
      temp_partnerledger."journal_id" AS temp_partnerledger_journal_id,
      temp_partnerledger."invoice_id" AS temp_partnerledger_invoice_id,
+     temp_partnerledger."move_id" AS temp_partnerledger_move_id,
      res_partner."name" AS res_partner_name,
      res_partner_A."name" AS res_partner_A_name,
      res_partner_A."street" AS res_partner_A_street,
@@ -50,14 +51,18 @@
      res_province."name" AS res_province_name,
      account_journal."name" AS account_journal_name,
      res_company."name" AS res_company_name,
-account_invoice.supplier_invoice_number, account_invoice.date_invoice, account_invoice.name, account_invoice.number
+     account_move."name" AS numreg,
+     account_move."ref" AS desreg,
+     account_move."narration" AS narration,
+account_invoice.supplier_invoice_number, account_invoice.date_invoice, account_invoice.name as numdoc, account_invoice.number
 FROM
      "public"."res_company" res_company RIGHT OUTER JOIN "public"."temp_partnerledger" temp_partnerledger ON res_company."id" = temp_partnerledger."p_company_id"
      LEFT OUTER JOIN "public"."res_partner" res_partner ON temp_partnerledger."partner_id" = res_partner."id"
      LEFT OUTER JOIN "public"."account_journal" account_journal ON temp_partnerledger."journal_id" = account_journal."id"
      LEFT OUTER JOIN "public"."res_partner" res_partner_A ON res_company."partner_id" = res_partner_A."id"
      LEFT OUTER JOIN "public"."res_province" res_province ON res_partner_A."province" = res_province."id"
-LEFT OUTER JOIN account_invoice on temp_partnerledger."invoice_id" = account_invoice.id
+	LEFT OUTER JOIN account_invoice on temp_partnerledger."invoice_id" = account_invoice.id
+	LEFT OUTER JOIN account_move on temp_partnerledger."move_id" = account_move.id
 
 ORDER BY
      temp_partnerledger."partner_id" ASC,
@@ -104,7 +109,7 @@ ORDER BY
 	<field name="res_company_name" class="java.lang.String"/>
 	<field name="supplier_invoice_number" class="java.lang.String"/>
 	<field name="date_invoice" class="java.sql.Date"/>
-	<field name="name" class="java.lang.String"/>
+	<field name="numdoc" class="java.lang.String"/>
 	<field name="number" class="java.lang.String"/>
 	<variable name="tot_dare" class="java.math.BigDecimal" resetType="Group" resetGroup="partner" calculation="Sum">
 		<variableExpression><![CDATA[$F{temp_partnerledger_dare}]]></variableExpression>
@@ -294,7 +299,7 @@ ORDER BY
 				<textElement verticalAlignment="Bottom">
 					<font size="8" isBold="true" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Protocollo]]></text>
+				<text><![CDATA[Num.Reg]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="139" y="59" width="67" height="15"/>
