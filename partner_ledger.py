@@ -75,7 +75,7 @@ class temp_partnerledger(orm.Model):
         context['state'] = 'posted'
         context['initial_bal'] = False
         dt = datetime.strptime(parameters.from_date, '%Y-%m-%d')
-        dt + relativedelta(days=-1)
+        dt = dt + relativedelta(days=-1)
         dt_from = dt.strftime('%Y-%m-%d')
         context['date_to'] = dt_from
         context['date_from'] = '2001-01-01'
