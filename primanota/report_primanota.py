@@ -133,7 +133,7 @@ class StampaPrimanota(orm.TransientModel):
                     'debit': move_line.debit,
                     'credit': move_line.credit,
                     'partner_id': move_line.partner_id.id,
-                    'des_partner': '{name} {vat}'.format(
+                    'des_partner': u'{name} {vat}'.format(
                         name=move_line.partner_id.name or '',
                         vat=move_line.partner_id.vat or ''),
                     'tax_code_id': move_line.tax_code_id.id,
