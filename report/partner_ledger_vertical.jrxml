@@ -6,7 +6,7 @@
 	<style name="Righe" mode="Opaque" fill="Solid">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
-			<style backcolor="#FAF5AF"/>
+			<style backcolor="#CCFFCC"/>
 		</conditionalStyle>
 	</style>
 	<queryString>
@@ -34,6 +34,7 @@
      temp_partnerledger."ref" AS temp_partnerledger_ref,
      temp_partnerledger."journal_id" AS temp_partnerledger_journal_id,
      res_partner."name" AS res_partner_name,
+     res_partner."ref" AS res_partner_ref,
      res_partner_A."name" AS res_partner_A_name,
      res_partner_A."street" AS res_partner_A_street,
      res_partner_A."city" AS res_partner_A_city,
@@ -97,6 +98,7 @@ ORDER BY
 	<field name="res_province_name" class="java.lang.String"/>
 	<field name="account_journal_name" class="java.lang.String"/>
 	<field name="res_company_name" class="java.lang.String"/>
+	<field name="res_partner_ref" class="java.lang.String"/>
 	<variable name="tot_dare" class="java.math.BigDecimal" resetType="Group" resetGroup="partner" calculation="Sum">
 		<variableExpression><![CDATA[$F{temp_partnerledger_dare}]]></variableExpression>
 	</variable>
@@ -108,7 +110,7 @@ ORDER BY
 		<groupHeader>
 			<band height="69">
 				<staticText>
-					<reportElement x="0" y="0" width="57" height="20"/>
+					<reportElement x="101" y="0" width="57" height="20"/>
 					<textElement verticalAlignment="Middle">
 						<font size="12" isBold="true"/>
 					</textElement>
@@ -167,7 +169,7 @@ ORDER BY
 					<text><![CDATA[Giornale]]></text>
 				</staticText>
 				<textField pattern="" isBlankWhenNull="true">
-					<reportElement x="57" y="0" width="498" height="20"/>
+					<reportElement x="159" y="0" width="396" height="20"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
@@ -193,6 +195,20 @@ ORDER BY
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression class="java.lang.Double"><![CDATA[$F{temp_partnerledger_saldo_in}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="3" y="0" width="30" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cod.]]></text>
+				</staticText>
+				<textField pattern="" isBlankWhenNull="true">
+					<reportElement x="33" y="3" width="68" height="17"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_ref}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -225,9 +241,9 @@ ORDER BY
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="66" splitType="Stretch">
+		<band height="39" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="16" width="238" height="15"/>
+				<reportElement x="132" y="0" width="238" height="15"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
@@ -235,13 +251,11 @@ ORDER BY
 ($F{res_partner_a_street2} == null ? "" :$F{res_partner_a_street2})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="48" width="238" height="15"/>
+				<reportElement x="3" y="15" width="238" height="15"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["Partita IVA: " + ($F{res_partner_a_vat} == null ? "": $F{res_partner_a_vat})+
-" Codice Fiscale: " +
-($F{res_partner_a_fiscalcode} == null ? "" :$F{res_partner_a_fiscalcode})]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Partita IVA: " + ($F{res_partner_a_vat} == null ? "": $F{res_partner_a_vat})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="238" height="15"/>
@@ -251,7 +265,7 @@ ORDER BY
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_company_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="32" width="238" height="15"/>
+				<reportElement x="356" y="0" width="197" height="15"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
@@ -317,7 +331,7 @@ ORDER BY
 	<detail>
 		<band height="16" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="555" height="15" isPrintWhenDetailOverflows="true"/>
+				<reportElement style="Righe" mode="Opaque" x="0" y="0" width="555" height="15" isPrintWhenDetailOverflows="true"/>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
 					<reportElement x="370" y="0" width="70" height="15">
 						<printWhenExpression><![CDATA[$F{temp_partnerledger_dare} >= 0]]></printWhenExpression>

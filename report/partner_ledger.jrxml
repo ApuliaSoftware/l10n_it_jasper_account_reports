@@ -35,6 +35,7 @@
      temp_partnerledger."journal_id" AS temp_partnerledger_journal_id,
      temp_partnerledger."invoice_id" AS temp_partnerledger_invoice_id,
      res_partner."name" AS res_partner_name,
+     res_partner."ref" AS res_partner_ref,
      res_partner_A."name" AS res_partner_A_name,
      res_partner_A."street" AS res_partner_A_street,
      res_partner_A."city" AS res_partner_A_city,
@@ -43,6 +44,7 @@
      res_partner_A."vat" AS res_partner_A_vat,
      res_partner_A."fax" AS res_partner_A_fax,
      res_partner_A."street2" AS res_partner_A_street2,
+     res_partner_A."ref" AS res_partner_A_ref,
      res_partner_A."phone" AS res_partner_A_phone,
      res_partner_A."mobile" AS res_partner_A_mobile,
      res_partner_A."fiscalcode" AS res_partner_A_fiscalcode,
@@ -106,6 +108,7 @@ ORDER BY
 	<field name="date_invoice" class="java.sql.Date"/>
 	<field name="name" class="java.lang.String"/>
 	<field name="number" class="java.lang.String"/>
+	<field name="res_partner_ref" class="java.lang.String"/>
 	<variable name="tot_dare" class="java.math.BigDecimal" resetType="Group" resetGroup="partner" calculation="Sum">
 		<variableExpression><![CDATA[$F{temp_partnerledger_dare}]]></variableExpression>
 	</variable>
@@ -180,7 +183,7 @@ ORDER BY
 				<reportElement x="0" y="74" width="802" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="17" width="176" height="20"/>
+				<reportElement x="0" y="19" width="176" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -201,35 +204,35 @@ ORDER BY
 				<text><![CDATA[Pg.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="176" y="17" width="62" height="20"/>
+				<reportElement x="176" y="19" width="62" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Da Data]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="238" y="17" width="70" height="20"/>
+				<reportElement x="238" y="19" width="70" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{temp_partnerledger_p_fromdate}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="308" y="17" width="62" height="20"/>
+				<reportElement x="308" y="19" width="62" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[A Data]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="370" y="17" width="70" height="20"/>
+				<reportElement x="370" y="19" width="70" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{temp_partnerledger_p_todate}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="195" y="0" width="206" height="15"/>
+				<reportElement x="195" y="3" width="206" height="15"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
@@ -237,7 +240,7 @@ ORDER BY
 ($F{res_partner_a_street2} == null ? "" :$F{res_partner_a_street2})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="587" y="0" width="211" height="15"/>
+				<reportElement x="587" y="3" width="211" height="15"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
@@ -246,14 +249,14 @@ ORDER BY
 ($F{res_partner_a_fiscalcode} == null ? "" :$F{res_partner_a_fiscalcode})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="206" height="15"/>
+				<reportElement x="0" y="3" width="206" height="15"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_company_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="401" y="0" width="171" height="15"/>
+				<reportElement x="401" y="3" width="171" height="15"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
@@ -262,14 +265,14 @@ ORDER BY
 ($F{res_province_code}== null ? "" :$F{res_province_code})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="37" width="57" height="20"/>
+				<reportElement x="119" y="39" width="57" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Partner]]></text>
 			</staticText>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement x="57" y="37" width="745" height="20"/>
+				<reportElement x="179" y="39" width="499" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
@@ -344,6 +347,20 @@ ORDER BY
 					<font size="8" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Dt Scadenza]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="30" y="42" width="82" height="17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_partner_ref}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="39" width="30" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cod.]]></text>
 			</staticText>
 		</band>
 	</pageHeader>

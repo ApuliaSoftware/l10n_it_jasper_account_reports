@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StPrimaNota" language="groovy" printOrder="Horizontal" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="85"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Righe" mode="Opaque" fill="Solid">
 		<conditionalStyle>
@@ -45,6 +45,18 @@
 	<field name="protocollo" class="java.lang.Integer"/>
 	<field name="importo_incpag" class="java.math.BigDecimal"/>
 	<sortField name="numreg"/>
+	<variable name="totdebit1" class="java.lang.Double" resetType="Group" resetGroup="Registrazione" calculation="Sum">
+		<variableExpression><![CDATA[$F{debit}]]></variableExpression>
+	</variable>
+	<variable name="totcredit1" class="java.lang.Double" resetType="Group" resetGroup="Registrazione" calculation="Sum">
+		<variableExpression><![CDATA[$F{credit}]]></variableExpression>
+	</variable>
+	<variable name="totdebit1_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{debit}]]></variableExpression>
+	</variable>
+	<variable name="totcredit1_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{credit}]]></variableExpression>
+	</variable>
 	<group name="Registrazione" isReprintHeaderOnEachPage="true" keepTogether="true">
 		<groupExpression><![CDATA[$F{numreg}]]></groupExpression>
 		<groupHeader>
@@ -90,10 +102,44 @@
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="9">
+			<band height="23">
 				<line>
 					<reportElement x="0" y="4" width="802" height="1"/>
 				</line>
+				<line>
+					<reportElement x="0" y="22" width="802" height="1"/>
+				</line>
+				<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
+					<reportElement isPrintRepeatedValues="false" x="707" y="7" width="40" height="14"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totdebit1}-$V{totcredit1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="766" y="7" width="21" height="14">
+						<printWhenExpression><![CDATA[$V{totdebit1}-$V{totcredit1}!=0]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Del]]></text>
+				</staticText>
+				<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
+					<reportElement isPrintRepeatedValues="false" x="596" y="5" width="40" height="14"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totdebit1}
+]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
+					<reportElement isPrintRepeatedValues="false" x="656" y="6" width="40" height="14"/>
+					<textElement textAlignment="Right">
+						<font fontName="SansSerif" size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totcredit1}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupFooter>
 	</group>
@@ -280,4 +326,50 @@
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="36">
+			<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
+				<reportElement isPrintRepeatedValues="false" x="530" y="19" width="61" height="14"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totdebit1_1}
+]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
+				<reportElement isPrintRepeatedValues="false" x="616" y="19" width="62" height="14"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totcredit1_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="394" y="19" width="118" height="14">
+					<printWhenExpression><![CDATA[$V{totdebit1}-$V{totcredit1}!=0]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Totali Generali]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="530" y="5" width="61" height="14">
+					<printWhenExpression><![CDATA[$V{totdebit1}-$V{totcredit1}!=0]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DARE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="617" y="5" width="61" height="14">
+					<printWhenExpression><![CDATA[$V{totdebit1}-$V{totcredit1}!=0]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AVERE]]></text>
+			</staticText>
+		</band>
+	</summary>
 </jasperReport>
