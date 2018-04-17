@@ -56,6 +56,7 @@ class temp_partnerledger(orm.Model):
         'ord_id': fields.float('Ordine'),
         'invoice_id': fields.many2one('account.invoice', 'Invoice'),
         'saldo_in': fields.float('Saldo Iniziale Stampa'),
+        'move_id': fields.many2one('account.move', 'Movimento Reg.'),
         }
 
     _order = 'date_mov,ref,date_maturity'
@@ -134,6 +135,7 @@ class temp_partnerledger(orm.Model):
                                 'invoice_id': riga.invoice.id,
                                 'date_maturity': riga.date_maturity,
                                 'saldo_in':saldo_in,
+                                'move_id': riga.move_id.id,
                                 }
                             self.create(cr, uid, riga_wr)
                             if not create:
