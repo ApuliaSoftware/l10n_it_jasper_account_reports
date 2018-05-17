@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="partner_ledger" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.7715610000000013"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="317"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Righe" mode="Opaque" fill="Solid">
 		<conditionalStyle>
@@ -141,7 +141,7 @@ ORDER BY
 					</textElement>
 					<textFieldExpression class="java.util.Date"><![CDATA[$F{temp_partnerledger_p_fromdate}]]></textFieldExpression>
 				</textField>
-				<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
+				<textField pattern="¤ #,##0.00" isBlankWhenNull="false">
 					<reportElement x="702" y="0" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font isBold="true"/>
@@ -156,26 +156,47 @@ ORDER BY
 					<reportElement x="0" y="0" width="802" height="1"/>
 				</line>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-					<reportElement x="633" y="5" width="70" height="20"/>
+					<reportElement x="616" y="14" width="85" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font isBold="true" isItalic="true"/>
 					</textElement>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{tot_avere}]]></textFieldExpression>
 				</textField>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-					<reportElement x="552" y="5" width="81" height="20"/>
+					<reportElement x="523" y="14" width="81" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font isBold="true" isItalic="true"/>
 					</textElement>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{tot_dare}]]></textFieldExpression>
 				</textField>
 				<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
-					<reportElement x="701" y="5" width="100" height="20"/>
+					<reportElement x="701" y="14" width="100" height="20"/>
 					<textElement textAlignment="Right" verticalAlignment="Bottom">
 						<font isBold="true" isItalic="true"/>
 					</textElement>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{SaldoFinale}]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement x="528" y="1" width="81" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Totale Dare]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="635" y="1" width="70" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Totale Avere]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="739" y="1" width="70" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font size="8" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Saldo]]></text>
+				</staticText>
 			</band>
 		</groupFooter>
 	</group>

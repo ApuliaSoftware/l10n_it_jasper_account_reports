@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StPrimaNota" language="groovy" printOrder="Horizontal" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="85"/>
+	<property name="ireport.x" value="83"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Righe" mode="Opaque" fill="Solid">
 		<conditionalStyle>
@@ -109,32 +109,31 @@
 				<line>
 					<reportElement x="0" y="22" width="802" height="1"/>
 				</line>
-				<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
-					<reportElement isPrintRepeatedValues="false" x="707" y="7" width="40" height="14"/>
+				<textField pattern="##,##0.00;-##,##0.00" isBlankWhenNull="false">
+					<reportElement isPrintRepeatedValues="false" x="743" y="6" width="59" height="14"/>
 					<textElement textAlignment="Right">
 						<font fontName="SansSerif" size="8" isBold="false"/>
 					</textElement>
 					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totdebit1}-$V{totcredit1}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="766" y="7" width="21" height="14">
+					<reportElement x="421" y="7" width="62" height="14">
 						<printWhenExpression><![CDATA[$V{totdebit1}-$V{totcredit1}!=0]]></printWhenExpression>
 					</reportElement>
 					<textElement>
 						<font size="10" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Del]]></text>
+					<text><![CDATA[Del Giorno]]></text>
 				</staticText>
-				<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
-					<reportElement isPrintRepeatedValues="false" x="596" y="5" width="40" height="14"/>
+				<textField pattern="##,##0.00;-##,##0.00" isBlankWhenNull="false">
+					<reportElement isPrintRepeatedValues="false" x="545" y="5" width="78" height="14"/>
 					<textElement textAlignment="Right">
 						<font fontName="SansSerif" size="8" isBold="false"/>
 					</textElement>
-					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totdebit1}
-]]></textFieldExpression>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totdebit1}]]></textFieldExpression>
 				</textField>
-				<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
-					<reportElement isPrintRepeatedValues="false" x="656" y="6" width="40" height="14"/>
+				<textField pattern="##,##0.00;-##,##0.00" isBlankWhenNull="false">
+					<reportElement isPrintRepeatedValues="false" x="623" y="6" width="73" height="14"/>
 					<textElement textAlignment="Right">
 						<font fontName="SansSerif" size="8" isBold="false"/>
 					</textElement>
@@ -187,7 +186,7 @@
 				<text><![CDATA[Partner]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="703" y="28" width="40" height="12"/>
+				<reportElement x="691" y="28" width="40" height="12"/>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="true"/>
 				</textElement>
@@ -246,14 +245,14 @@
 				</graphicElement>
 			</rectangle>
 			<textField isBlankWhenNull="true">
-				<reportElement x="540" y="0" width="156" height="14" isRemoveLineWhenBlank="true"/>
+				<reportElement x="518" y="0" width="156" height="14" isRemoveLineWhenBlank="true"/>
 				<textElement>
 					<font fontName="SansSerif" size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{des_partner}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.00;-###0.00" isBlankWhenNull="true">
-				<reportElement isPrintRepeatedValues="false" x="703" y="0" width="40" height="14" isRemoveLineWhenBlank="true">
+			<textField pattern="##,##0.00;-##,##0.00" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="677" y="0" width="59" height="14" isRemoveLineWhenBlank="true">
 					<printWhenExpression><![CDATA[$F{debit}!= 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right">
@@ -261,8 +260,8 @@
 				</textElement>
 				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{debit}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.00;###0.00-" isBlankWhenNull="true">
-				<reportElement isPrintRepeatedValues="false" x="747" y="0" width="40" height="14" isRemoveLineWhenBlank="true">
+			<textField pattern="##,##0.00;-##,##0.00" isBlankWhenNull="true">
+				<reportElement isPrintRepeatedValues="false" x="736" y="0" width="62" height="14" isRemoveLineWhenBlank="true">
 					<printWhenExpression><![CDATA[$F{credit}!= 0]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Right">
@@ -278,28 +277,28 @@
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{data_doc}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement mode="Transparent" x="147" y="0" width="148" height="14" isRemoveLineWhenBlank="true" forecolor="#000000" backcolor="#FFFFFF"/>
+				<reportElement mode="Transparent" x="138" y="0" width="148" height="14" isRemoveLineWhenBlank="true" forecolor="#000000" backcolor="#FFFFFF"/>
 				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
 					<font fontName="SansSerif" size="8" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{desriga}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="300" y="0" width="83" height="14" isRemoveLineWhenBlank="true"/>
+				<reportElement x="287" y="0" width="83" height="14" isRemoveLineWhenBlank="true"/>
 				<textElement>
 					<font fontName="SansSerif" size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{account_code}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="383" y="0" width="147" height="14" isRemoveLineWhenBlank="true"/>
+				<reportElement x="370" y="0" width="147" height="14" isRemoveLineWhenBlank="true"/>
 				<textElement>
 					<font fontName="SansSerif" size="8" isBold="false"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{account_name}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-				<reportElement x="86" y="0" width="56" height="12"/>
+				<reportElement x="82" y="0" width="56" height="12"/>
 				<textElement>
 					<font fontName="SansSerif" size="8"/>
 				</textElement>
@@ -328,16 +327,15 @@
 	</pageFooter>
 	<summary>
 		<band height="36">
-			<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
-				<reportElement isPrintRepeatedValues="false" x="530" y="19" width="61" height="14"/>
+			<textField pattern="##,##0.00;-##,##0.00" isBlankWhenNull="false">
+				<reportElement isPrintRepeatedValues="false" x="530" y="19" width="86" height="14"/>
 				<textElement textAlignment="Right">
 					<font fontName="SansSerif" size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totdebit1_1}
-]]></textFieldExpression>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{totdebit1_1}]]></textFieldExpression>
 			</textField>
-			<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
-				<reportElement isPrintRepeatedValues="false" x="616" y="19" width="62" height="14"/>
+			<textField pattern="##,##0.00;-##,##0.00" isBlankWhenNull="false">
+				<reportElement isPrintRepeatedValues="false" x="616" y="19" width="91" height="14"/>
 				<textElement textAlignment="Right">
 					<font fontName="SansSerif" size="8" isBold="false"/>
 				</textElement>
@@ -345,7 +343,7 @@
 			</textField>
 			<staticText>
 				<reportElement x="394" y="19" width="118" height="14">
-					<printWhenExpression><![CDATA[$V{totdebit1}-$V{totcredit1}!=0]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$V{totdebit1_1}-$V{totcredit1_1}!=0]]></printWhenExpression>
 				</reportElement>
 				<textElement>
 					<font size="10" isBold="true"/>
@@ -353,8 +351,8 @@
 				<text><![CDATA[Totali Generali]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="530" y="5" width="61" height="14">
-					<printWhenExpression><![CDATA[$V{totdebit1}-$V{totcredit1}!=0]]></printWhenExpression>
+				<reportElement x="551" y="5" width="61" height="14">
+					<printWhenExpression><![CDATA[$V{totdebit1_1}-$V{totcredit1_1}!=0]]></printWhenExpression>
 				</reportElement>
 				<textElement>
 					<font size="10" isBold="true"/>
@@ -362,8 +360,8 @@
 				<text><![CDATA[DARE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="617" y="5" width="61" height="14">
-					<printWhenExpression><![CDATA[$V{totdebit1}-$V{totcredit1}!=0]]></printWhenExpression>
+				<reportElement x="639" y="5" width="61" height="14">
+					<printWhenExpression><![CDATA[$V{totdebit1_1}-$V{totcredit1_1}!=0]]></printWhenExpression>
 				</reportElement>
 				<textElement>
 					<font size="10" isBold="true"/>
