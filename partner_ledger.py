@@ -57,7 +57,10 @@ class temp_partnerledger(orm.Model):
         'invoice_id': fields.many2one('account.invoice', 'Invoice'),
         'saldo_in': fields.float('Saldo Iniziale Stampa'),
         'move_id': fields.many2one('account.move', 'Movimento Reg.'),
-        }
+        'account_central_journal_progressive': fields.integer(
+            'Account Central Journal Progressive')
+
+    }
 
     _order = 'date_mov,ref,date_maturity'
 
@@ -136,6 +139,7 @@ class temp_partnerledger(orm.Model):
                                 'date_maturity': riga.date_maturity,
                                 'saldo_in':saldo_in,
                                 'move_id': riga.move_id.id,
+                                'account_central_journal_progressive': riga.account_central_journal_progressive,
                                 }
                             self.create(cr, uid, riga_wr)
                             if not create:
