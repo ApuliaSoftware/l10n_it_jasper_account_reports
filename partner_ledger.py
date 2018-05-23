@@ -78,7 +78,7 @@ class temp_partnerledger(orm.Model):
         context['state'] = 'posted'
         context['initial_bal'] = False
         dt = datetime.strptime(parameters.from_date, '%Y-%m-%d')
-        dt + relativedelta(days=-1)
+        dt = dt + relativedelta(days=-1)
         dt_from = dt.strftime('%Y-%m-%d')
         context['date_to'] = dt_from
         context['date_from'] = '2001-01-01'
@@ -100,6 +100,7 @@ class temp_partnerledger(orm.Model):
             credito_in = partner_obj.browse(
                 cr, uid, partner.id, context).debit
             saldo_in = self.calcola_saldo_ini(cr,uid, partner.id, context)
+            # import pdb;pdb.set_trace()
             if parameters.customer:
                 conto = partner.property_account_receivable.id
             else:
